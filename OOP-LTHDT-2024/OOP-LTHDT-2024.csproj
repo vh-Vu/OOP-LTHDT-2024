@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>OOP_LTHDT__2024</RootNamespace>
+    <RootNamespace>OOP_LTHDT_2024</RootNamespace>
   </PropertyGroup>
 
 </Project>
