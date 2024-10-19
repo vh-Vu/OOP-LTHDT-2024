@@ -18,7 +18,7 @@ Chú ý:
 
 - Làm với giao diện web  
 - Các dữ liệu phải được lưu trữ trên tập tin  
-- Phải tổ chức theo mô hình 3 lớp.  
+- Phải tổ chức theo mô hình 3 lớp. 
 - File doc tự đánh giá
 
 

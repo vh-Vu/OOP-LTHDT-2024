@@ -7,4 +7,9 @@
     <RootNamespace>OOP_LTHDT_2024</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QLSP_Entity\QLSP_Entity.csproj" />
+    <ProjectReference Include="..\QLSP_XuLyNghiepVu\QLSP_XuLyNghiepVu.csproj" />
+  </ItemGroup>
+
 </Project>
