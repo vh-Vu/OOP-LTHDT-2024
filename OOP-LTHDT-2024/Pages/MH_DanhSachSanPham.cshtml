@@ -1,0 +1,19 @@
+﻿@page
+@model OOP_LTHDT_2024.Pages.MH_DanhSachSanPhamModel
+@{
+}
+<table>
+	<tr>
+		<td>Mã sản phẩm</td>
+		<td>Tên</td>
+		<td>Giá</td>
+	</tr>
+	@foreach (var sanPham in Model.DanhSachSanPham)
+	{
+		<tr>
+			<td>@sanPham.MaSP</td>
+			<td>@sanPham.Ten</td>
+			<td>@sanPham.Gia</td>
+		</tr>
+	}
+</table>

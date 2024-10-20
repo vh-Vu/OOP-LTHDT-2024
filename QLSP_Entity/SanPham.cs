@@ -2,6 +2,7 @@
 {
 	public class SanPham
 	{
+		public int MaSP { get; set; }
 		public string Ten { get; set; }
 		public int Gia { get; set; }
 		public SanPham(string ten, int gia)

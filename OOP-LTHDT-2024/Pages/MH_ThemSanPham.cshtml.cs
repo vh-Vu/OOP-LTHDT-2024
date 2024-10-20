@@ -12,7 +12,11 @@ namespace OOP_LTHDT_2024.Pages
         [BindProperty]
 		public int Gia { get; set; }
         public string Chuoi { get; set; } = string.Empty;
+        private IXuLySanPham _xuLySanPham;
 
+        public MH_ThemSanPhamModel() : base() {
+            _xuLySanPham = ObjectCreater.TaoDoiTuongXuLySanPham();
+		}
         public void OnGet()
         {
             Chuoi = "Vui long nhap san pham";
@@ -23,8 +27,8 @@ namespace OOP_LTHDT_2024.Pages
             try
             {
 				SanPham sanPham = new SanPham(TenSanPham, Gia);
-                XuLySanPham xuLySanPham = new XuLySanPham();
-                xuLySanPham.ThemSanPham(sanPham);
+				_xuLySanPham.ThemSanPham(sanPham);
+				Chuoi = "Them thanh cong";
 			}
             catch (Exception ex)
             {
