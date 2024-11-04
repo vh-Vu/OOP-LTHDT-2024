@@ -2,18 +2,30 @@
 @model OOP_LTHDT_2024.Pages.MH_DanhSachSanPhamModel
 @{
 }
-<table>
-	<tr>
-		<td>Mã sản phẩm</td>
-		<td>Tên</td>
-		<td>Giá</td>
-	</tr>
-	@foreach (var sanPham in Model.DanhSachSanPham)
-	{
+
+<div>
+	<form action="/" method="get">
+		<label for="search-bar">Tìm kiếm sản phẩm</label>
+		<input type="text" id="search-bar" name="search-bar" class="search" placeholder="Tìm kiếm" />
+		<input class="btn-self" type="submit"/>
+	</form>
+</div>
+
+<div class="table-content">
+	<table>
 		<tr>
-			<td>@sanPham.MaSP</td>
-			<td>@sanPham.Ten</td>
-			<td>@sanPham.Gia</td>
+			<td>Mã sản phẩm</td>
+			<td>Tên</td>
+			<td>Giá</td>
 		</tr>
-	}
-</table>
+		@foreach (var sanPham in Model.DanhSachSanPham)
+		{
+			<tr>
+				<td>@sanPham.MaSP</td>
+				<td>@sanPham.Ten</td>
+				<td>@sanPham.Gia</td>
+			</tr>
+		}
+	</table>
+
+</div>

@@ -14,7 +14,7 @@ namespace QLSP_Entity
 		public MatHang(string TenMH) { 
 			if(string.IsNullOrEmpty(TenMH))
 			{ throw new Exception("Ten mat hang khong hop le"); }
-			this.TenMH = TenMH;
+			this.TenMH = TenMH;	
 		}
 	}
 }

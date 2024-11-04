@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.search {
+    margin-left: 3rem;
+    border: soild;
+    border-radius: 8px;
+    width: 35%;
+}
+.table-content {
+    margin: 3rem 0;
+}
+
+.btn-self {
+    margin-left: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #009E74;
+    color: white;
+    text-align: center;
+}
