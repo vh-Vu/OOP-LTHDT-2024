@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using QLSP_Entity;
 using QLSP_XuLyNghiepVu;
+using System.Diagnostics.Eventing.Reader;
 
 namespace OOP_LTHDT_2024.Pages
 {
@@ -9,13 +10,35 @@ namespace OOP_LTHDT_2024.Pages
     {
         public List<SanPham> DanhSachSanPham { get; set; }
         public IXuLySanPham _xuLySanPham;
+        [BindProperty]
+		public string Keyword { get; set; }
+		public string chuoi = string.Empty;
         public MH_DanhSachSanPhamModel() : base()
         {
             _xuLySanPham = ObjectCreater.TaoDoiTuongXuLySanPham();
         }
         public void OnGet()
         {
-            DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham();
+			try
+			{
+				DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham();
+
+			}
+			catch (Exception ex)
+			{
+				chuoi = ex.Message;
+			}
 		}
-    }
+        public void OnPost()
+        {
+            try
+            {
+				DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham(Keyword);
+
+			}catch(Exception ex)
+            {
+                chuoi = ex.Message;
+            }
+		}
+	}
 }

@@ -18,9 +18,15 @@ namespace QLSP_XuLyNghiepVu
 				throw new Exception("ID da ton tai");
 			_luuTruSanPham.LuuSanPham(s);
 		}
-		public List<SanPham> DocDanhSachSanPham()
+		public List<SanPham> DocDanhSachSanPham(string Keyword="")
 		{
-			return _luuTruSanPham.DocDanhSach();
+			var dsSanPham = _luuTruSanPham.DocDanhSach();
+			var ketQua = new List<SanPham>();
+			foreach(var SanPham in dsSanPham)
+			{
+				if(SanPham.Ten.Contains(Keyword)) ketQua.Add(SanPham);
+			}
+			return ketQua;
 		}
 	}
 }

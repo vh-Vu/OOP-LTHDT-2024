@@ -10,6 +10,6 @@ namespace QLSP_XuLyNghiepVu
 	public interface IXuLySanPham
 	{
 		void ThemSanPham(SanPham s);
-		public List<SanPham> DocDanhSachSanPham();
+		public List<SanPham> DocDanhSachSanPham(string Keyword="");
 	}
 }
