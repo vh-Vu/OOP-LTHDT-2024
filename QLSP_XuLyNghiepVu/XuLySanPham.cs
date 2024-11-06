@@ -41,6 +41,19 @@ namespace QLSP_XuLyNghiepVu
 			}
 			_luuTruSanPham.LuuDanhSach(dsSanPham);
 		}
+		public void XoaSanPham(SanPham s)
+		{
+			var dsSanPham = _luuTruSanPham.DocDanhSach();
+			for (int i = 0; i < dsSanPham.Count; i++)
+			{
+				if (dsSanPham[i].MaSP == s.MaSP)
+				{
+					dsSanPham.Remove(dsSanPham[i]);
+					break;
+				}
+			}
+			_luuTruSanPham.LuuDanhSach(dsSanPham);
+		}
 		public SanPham DocSanPham(int maSP)
 		{
 			var dsSanPham = _luuTruSanPham.DocDanhSach();
@@ -50,5 +63,7 @@ namespace QLSP_XuLyNghiepVu
 			}
 			return null;
 		}
+
+
 	}
 }

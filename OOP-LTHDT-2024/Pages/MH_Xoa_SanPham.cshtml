@@ -1,15 +1,15 @@
 ﻿@page
-@model OOP_LTHDT_2024.Pages.MH_Sua_SanPhamModel
+@model OOP_LTHDT_2024.Pages.MH_Xoa_SanPhamModel
 @{
 }
-@if(Model.SanPham != null)
+@if (Model.SanPham != null)
 {
 	<form method="post">
 		<label for="TenSanPham">Tên sản phẩm:</label>
 		<input type="text" name="TenSanPham" value="@Model.SanPham.Ten" /> <br />
 		<label for="Gia">Giá sản phẩm:</label>
 		<input type="text" name="Gia" value="@Model.SanPham.Gia" /> <br />
-		<input type="submit" value="Sửa" />
+		<input type="submit" value="Xoá" />
 	</form>
 }
 else

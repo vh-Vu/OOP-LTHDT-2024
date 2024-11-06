@@ -13,5 +13,7 @@ namespace QLSP_XuLyNghiepVu
 		public List<SanPham> DocDanhSachSanPham(string Keyword="");
 		public SanPham DocSanPham(int maSP);
 		public void SuaSanPham(SanPham s);
+		public void XoaSanPham(SanPham s);
+
 	}
 }
