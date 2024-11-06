@@ -17,6 +17,7 @@
 			<td>Mã sản phẩm</td>
 			<td>Tên</td>
 			<td>Giá</td>
+			<td class="action">Hành động</td>
 		</tr>
 		@foreach (var sanPham in Model.DanhSachSanPham)
 		{
@@ -24,6 +25,10 @@
 				<td>@sanPham.MaSP</td>
 				<td>@sanPham.Ten</td>
 				<td>@sanPham.Gia</td>
+				<td class="action">
+					<a href="MH_Sua_SanPham?masp=@sanPham.MaSP">Sửa</a>
+					<a href="MH_Xoa_SanPham?masp=@sanPham.MaSP">Xoá</a>
+				</td>
 			</tr>
 		}
 	</table>

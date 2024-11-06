@@ -28,5 +28,27 @@ namespace QLSP_XuLyNghiepVu
 			}
 			return ketQua;
 		}
+		
+		public void SuaSanPham(SanPham s)
+		{
+			var dsSanPham = _luuTruSanPham.DocDanhSach();
+			for(int i = 0; i < dsSanPham.Count; i++)
+			{
+				if (dsSanPham[i].MaSP == s.MaSP)
+				{
+					dsSanPham[i] = s; break;
+				}
+			}
+			_luuTruSanPham.LuuDanhSach(dsSanPham);
+		}
+		public SanPham DocSanPham(int maSP)
+		{
+			var dsSanPham = _luuTruSanPham.DocDanhSach();
+			foreach(var SanPham in dsSanPham)
+			{
+				if (SanPham.MaSP == maSP) return SanPham;
+			}
+			return null;
+		}
 	}
 }
