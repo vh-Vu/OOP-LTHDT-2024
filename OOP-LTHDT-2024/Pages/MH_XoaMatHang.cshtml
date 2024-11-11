@@ -1,0 +1,15 @@
+﻿@page
+@model OOP_LTHDT_2024.Pages.MH_XoaMatHangModel
+@{
+}
+@if (Model.MatHang != null)
+{
+	<form method="post">
+		<h3>Bạn có thật sự muốn xóa mặt hàng @Model.MatHang.TenMH không?</h3>
+		<input type="submit" value="Xoá" />
+	</form>
+}
+else
+{
+	@Model.Chuoi;
+}

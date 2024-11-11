@@ -12,10 +12,7 @@ namespace OOP_LTHDT_2024.Pages
 
 		[BindProperty(SupportsGet = true)]
 		public int MaSp { get; set; }
-		[BindProperty]
-		public string TenSanPham { get; set; }
-		[BindProperty]
-		public int Gia { get; set; }
+
 		public string Chuoi = string.Empty;
 		public MH_Xoa_SanPhamModel() : base()
 		{
