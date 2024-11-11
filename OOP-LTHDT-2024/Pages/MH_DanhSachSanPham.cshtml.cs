@@ -33,6 +33,7 @@ namespace OOP_LTHDT_2024.Pages
         {
             try
             {
+				if (string.IsNullOrEmpty(Keyword)) Keyword = "";
 				DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham(Keyword);
 
 			}catch(Exception ex)
