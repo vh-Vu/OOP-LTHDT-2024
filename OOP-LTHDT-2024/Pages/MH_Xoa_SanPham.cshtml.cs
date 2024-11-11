@@ -45,8 +45,6 @@ namespace OOP_LTHDT_2024.Pages
 				if (SanPham == null) Chuoi = "Khong tim thay san pham";
 				else
 				{
-					SanPham.Ten = TenSanPham;
-					SanPham.Gia = Gia;
 					_xuLySanPham.XoaSanPham(SanPham);
 					Response.Redirect("/MH_DanhSachSanPham");
 				}

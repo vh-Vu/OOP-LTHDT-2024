@@ -5,10 +5,7 @@
 @if (Model.SanPham != null)
 {
 	<form method="post">
-		<label for="TenSanPham">Tên sản phẩm:</label>
-		<input type="text" name="TenSanPham" value="@Model.SanPham.Ten" /> <br />
-		<label for="Gia">Giá sản phẩm:</label>
-		<input type="text" name="Gia" value="@Model.SanPham.Gia" /> <br />
+		<h3>Bạn có thật sự muốn xóa sản phẩm @Model.SanPham.Ten không?</h3>
 		<input type="submit" value="Xoá" />
 	</form>
 }
