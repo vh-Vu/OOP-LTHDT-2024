@@ -10,7 +10,7 @@ namespace QLSP_XuLyNghiepVu
 	public interface IXuLyMatHang
 	{
 		void ThemMatHang(MatHang matHang);
-		List<MatHang> DocDanhSachMatHang();
+		List<MatHang> DocDanhSachMatHang(string Keyword = "");
 		void SuaMatHang(MatHang matHang);
 		void XoaMatHang(MatHang matHang);
 		void ThemSanPhamVaoMatHang(SanPham sanPham);

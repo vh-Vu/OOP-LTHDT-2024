@@ -16,9 +16,15 @@ namespace QLSP_XuLyNghiepVu
 			_luuTruMatHang = dsMatHang;
 		}
 
-		public List<MatHang> DocDanhSachMatHang()
+		public List<MatHang> DocDanhSachMatHang(string Keyword ="")
 		{
-			return _luuTruMatHang.DocDanhSachMatHang();
+			var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
+			var ketQua = new List<MatHang>();
+			foreach(var mh in dsMatHang)
+			{
+				if(mh.TenMH.Contains(Keyword)) ketQua.Add(mh);
+			}
+			return ketQua;
 		}
 
 		public void ThemMatHang(MatHang matHang)
