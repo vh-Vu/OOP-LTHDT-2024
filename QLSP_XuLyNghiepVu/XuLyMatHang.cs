@@ -34,7 +34,7 @@ namespace QLSP_XuLyNghiepVu
 
 		public void SuaMatHang(MatHang matHang)
 		{
-			var dsMatHang = DocDanhSachMatHang();
+			var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
 			for (int i = 0; i < dsMatHang.Count; i++)
 			{
 				if (dsMatHang[i].MaMH == matHang.MaMH)
@@ -85,6 +85,16 @@ namespace QLSP_XuLyNghiepVu
 			XoaSanPhamRaKhoiMatHang(sanPham);
 			sanPham.MatHang = maMatHangMoi;
 			ThemSanPhamVaoMatHang(sanPham);
+		}
+
+		public MatHang DocMatHang(int maMH)
+		{
+			var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
+			foreach (var MatHang in dsMatHang)
+			{
+				if (MatHang.MaMH == maMH) return MatHang;
+			}
+			return null;
 		}
 	}
 }

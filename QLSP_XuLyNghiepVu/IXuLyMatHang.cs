@@ -16,6 +16,7 @@ namespace QLSP_XuLyNghiepVu
 		void ThemSanPhamVaoMatHang(SanPham sanPham);
 		void XoaSanPhamRaKhoiMatHang(SanPham sanPham);
 		void SanPhamThayDoiMatHang(SanPham sanPham, int maMatHangMoi);
+		MatHang DocMatHang(int maMH);
 
 	}
 }
