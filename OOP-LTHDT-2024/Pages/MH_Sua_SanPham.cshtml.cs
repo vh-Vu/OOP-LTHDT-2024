@@ -18,7 +18,7 @@ namespace OOP_LTHDT_2024.Pages
 		[BindProperty]
         public int Gia { get; set; }
         [BindProperty]
-        public string CongCongTySanXuat { get; set; }
+        public string CongTySanXuat { get; set; }
 		[BindProperty]
 
 		public DateOnly HanSuDung { get; set; }
@@ -54,15 +54,16 @@ namespace OOP_LTHDT_2024.Pages
                 }
                 SanPham = _xuLySanPham.DocSanPham(MaSp);
                 if (SanPham == null) Chuoi = "Khong tim thay san pham";
-                else
+				else
                 {
                     SanPham.Ten = TenSanPham;
                     SanPham.Gia = Gia;
                     SanPham.NamSanXuat = NamSanXuat;
                     SanPham.MatHang = MatHang;
                     SanPham.HanSuDung = HanSuDung;
-
-                    _xuLySanPham.SuaSanPham(SanPham);
+                    SanPham.CongTySanXuat = CongTySanXuat;
+                    SanPham.KiemTraDieuKien();
+					_xuLySanPham.SuaSanPham(SanPham);
                     Response.Redirect("/MH_DanhSachSanPham");
                 }
             }

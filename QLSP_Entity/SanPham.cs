@@ -27,5 +27,15 @@
 			this.CongTySanXuat = congTySanXuat;
 			this.MatHang = matHang;
 		}
+		public void KiemTraDieuKien()
+		{
+			if (string.IsNullOrEmpty(this.Ten)) throw new Exception("Ten san pham khong hop le");
+			if (this.Gia <= 0) throw new Exception("Gia san pham khong hop le");
+			if (string.IsNullOrEmpty(this.CongTySanXuat)) throw new Exception("Ten cong ty khong hop le");
+			if (this.HanSuDung < DateOnly.FromDateTime(DateTime.Now)) throw new Exception("Han su dung khong hop le");
+			int currentYear = DateTime.Now.Year;
+			if (this.NamSanXuat > currentYear) throw new Exception("Nam san xuat khong hop le");
+			if (this.MatHang <= 0) throw new Exception("Mat hang khong hop le");
+		}
 	}
 }

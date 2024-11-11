@@ -2,7 +2,7 @@
 @model OOP_LTHDT_2024.Pages.MH_Sua_SanPhamModel
 @{
 }
-@if(Model.SanPham != null)
+@if(Model.SanPham != null&& string.IsNullOrEmpty(Model.Chuoi))
 {
 	<form method="post">
 		<label for="TenSanPham">Tên sản phẩm:</label>
