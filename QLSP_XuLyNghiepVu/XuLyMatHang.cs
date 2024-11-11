@@ -25,5 +25,60 @@ namespace QLSP_XuLyNghiepVu
 		{
 			_luuTruMatHang.ThemMatHang(matHang);
 		}
+
+		public void SuaMatHang(MatHang matHang)
+		{
+			var dsMatHang = DocDanhSachMatHang();
+			for (int i = 0; i < dsMatHang.Count; i++)
+			{
+				if (dsMatHang[i].MaMH == matHang.MaMH)
+				{
+					dsMatHang[i] = matHang; break;
+				}
+			}
+			_luuTruMatHang.LuuDanhSachMatHang(dsMatHang);
+		}
+		public void XoaMatHang(MatHang matHang)
+		{
+			var dsMatHang = DocDanhSachMatHang();
+			for (int i = 0; i < dsMatHang.Count; i++)
+			{
+				if (dsMatHang[i].MaMH == matHang.MaMH)
+				{
+					dsMatHang.Remove(dsMatHang[i]); break;
+				}
+			}
+			_luuTruMatHang.LuuDanhSachMatHang(dsMatHang);
+		}
+		public void ThemSanPhamVaoMatHang(SanPham sanPham)
+		{
+			var dsMatHang = DocDanhSachMatHang();
+			for(int i = 0;i < dsMatHang.Count; i++)
+			{
+				if (dsMatHang[i].MaMH== sanPham.MatHang)
+				{
+					dsMatHang[i].DanhSachSanPham.Add(sanPham.MaSP); break;	
+				}
+			}
+			_luuTruMatHang.LuuDanhSachMatHang(dsMatHang);
+		}
+		public void XoaSanPhamRaKhoiMatHang(SanPham sanPham)
+		{
+			var dsMatHang = DocDanhSachMatHang();
+			for (int i = 0; i < dsMatHang.Count; i++)
+			{
+				if (dsMatHang[i].MaMH == sanPham.MatHang)
+				{
+					dsMatHang[i].DanhSachSanPham.Remove(sanPham.MaSP); break;
+				}
+			}
+			_luuTruMatHang.LuuDanhSachMatHang(dsMatHang);
+		}
+		public void SanPhamThayDoiMatHang(SanPham sanPham, int maMatHangMoi)
+		{
+			XoaSanPhamRaKhoiMatHang(sanPham);
+			sanPham.MatHang = maMatHangMoi;
+			ThemSanPhamVaoMatHang(sanPham);
+		}
 	}
 }

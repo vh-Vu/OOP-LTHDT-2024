@@ -11,5 +11,11 @@ namespace QLSP_XuLyNghiepVu
 	{
 		void ThemMatHang(MatHang matHang);
 		List<MatHang> DocDanhSachMatHang();
+		void SuaMatHang(MatHang matHang);
+		void XoaMatHang(MatHang matHang);
+		void ThemSanPhamVaoMatHang(SanPham sanPham);
+		void XoaSanPhamRaKhoiMatHang(SanPham sanPham);
+		void SanPhamThayDoiMatHang(SanPham sanPham, int maMatHangMoi);
+
 	}
 }

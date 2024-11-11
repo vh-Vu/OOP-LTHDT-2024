@@ -8,7 +8,15 @@
 		<label for="TenSanPham">Tên sản phẩm:</label>
 		<input type="text" name="TenSanPham" value="@Model.SanPham.Ten" /> <br />
 		<label for="Gia">Giá sản phẩm:</label>
-		<input type="text" name="Gia" value="@Model.SanPham.Gia" /> <br />
+		<input type="number" name="Gia" value="@Model.SanPham.Gia" /> <br />
+		<label for="CongTySanXuat">Công ty sản xuất:</label>
+		<input type="text" name="CongTySanXuat" value="@Model.SanPham.CongTySanXuat" /> <br />
+		<label for="NamSanXuat">Năm sản xuất:</label>
+		<input type="number" name="NamSanXuat" value="@Model.SanPham.NamSanXuat" /> <br />
+		<label for="HanSuDung">Hạn sử dụng:</label>
+		<input type="date" name="HanSuDung" value="@Model.SanPham.HanSuDung.ToString("yyyy-MM-dd")"  /> <br />
+		<label for="MatHang">Mặt hàng:</label>
+		<input type="text" name="MatHang" value="@Model.SanPham.MatHang" /> <br />
 		<input type="submit" value="Sửa" />
 	</form>
 }

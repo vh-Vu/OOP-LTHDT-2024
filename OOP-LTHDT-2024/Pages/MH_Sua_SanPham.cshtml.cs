@@ -17,6 +17,17 @@ namespace OOP_LTHDT_2024.Pages
         public string TenSanPham { get; set; }
 		[BindProperty]
         public int Gia { get; set; }
+        [BindProperty]
+        public string CongCongTySanXuat { get; set; }
+		[BindProperty]
+
+		public DateOnly HanSuDung { get; set; }
+		[BindProperty]
+
+		public int NamSanXuat { get; set; }
+		[BindProperty]
+
+		public int MatHang {  get; set; }
 		public string Chuoi = string.Empty;
         public MH_Sua_SanPhamModel() : base() {
             _xuLySanPham = ObjectCreater.TaoDoiTuongXuLySanPham();
@@ -47,6 +58,10 @@ namespace OOP_LTHDT_2024.Pages
                 {
                     SanPham.Ten = TenSanPham;
                     SanPham.Gia = Gia;
+                    SanPham.NamSanXuat = NamSanXuat;
+                    SanPham.MatHang = MatHang;
+                    SanPham.HanSuDung = HanSuDung;
+
                     _xuLySanPham.SuaSanPham(SanPham);
                     Response.Redirect("/MH_DanhSachSanPham");
                 }

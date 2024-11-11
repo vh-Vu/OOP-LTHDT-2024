@@ -6,8 +6,8 @@
 <div>
 	<form method="post">
 		<label for="search-bar">Tìm kiếm sản phẩm</label>
-		<input type="text" id="search-bar" name="keyword" class="search" placeholder="Tìm kiếm" />
-		<input class="btn-self" type="submit"/>
+		<input type="text" id="search-bar" name="keyword" class="search" placeholder="Nhập tên sản phẩm" />
+		<input class="btn-self" type="submit" value="Tìm kiếm"/>
 	</form>
 </div>
 
@@ -17,6 +17,10 @@
 			<td>Mã sản phẩm</td>
 			<td>Tên</td>
 			<td>Giá</td>
+			<td>Năm sản xuất</td>
+			<td>Hạn sử dụng</td>
+			<td>Công ty sản xuất</td>
+			<td>Mặt hàng</td>
 			<td class="action">Hành động</td>
 		</tr>
 		@foreach (var sanPham in Model.DanhSachSanPham)
@@ -25,6 +29,10 @@
 				<td>@sanPham.MaSP</td>
 				<td>@sanPham.Ten</td>
 				<td>@sanPham.Gia</td>
+				<td>@sanPham.NamSanXuat</td>
+				<td>@sanPham.HanSuDung</td>
+				<td>@sanPham.CongTySanXuat</td>
+				<td>@sanPham.MatHang</td>
 				<td class="action">
 					<a href="MH_Sua_SanPham?masp=@sanPham.MaSP">Sửa</a>
 					<a href="MH_Xoa_SanPham?masp=@sanPham.MaSP">Xoá</a>

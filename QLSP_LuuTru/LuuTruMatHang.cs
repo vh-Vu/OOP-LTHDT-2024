@@ -27,7 +27,9 @@ namespace QLSP_LuuTru
 		{
 			int maxId = 0;
 			var dsMatHang = DocDanhSachMatHang();
-			while (maxId++ < dsMatHang.Count) { }
+			int soLuongMatHang = dsMatHang.Count;
+			if (soLuongMatHang == 0) maxId = 1;
+			else maxId = dsMatHang[soLuongMatHang - 1].MaMH+1;
 			matHang.MaMH = maxId;
 			dsMatHang.Add(matHang);
 			LuuDanhSachMatHang(dsMatHang);
