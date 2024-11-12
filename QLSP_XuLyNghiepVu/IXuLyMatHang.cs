@@ -17,6 +17,6 @@ namespace QLSP_XuLyNghiepVu
 		void XoaSanPhamRaKhoiMatHang(SanPham sanPham);
 		void SanPhamThayDoiMatHang(SanPham sanPham, int maMatHangMoi);
 		MatHang DocMatHang(int maMH);
-
+		bool MaMatHangTonTai(int maMH);
 	}
 }

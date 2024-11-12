@@ -15,7 +15,13 @@
 	<label for="HanSuDung">Hạn sử dụng:</label>
 	<input type="date" name="HanSuDung" value="" /> <br />
 	<label for="MatHang">Mặt hàng:</label>
-	<input type="text" name="MatHang" value="" /> <br />
+	<select name="MatHang">
+		@foreach(var mh in Model.DsMatHang)
+		{
+			<option value="@mh.MaMH">@mh.TenMH</option>
+		}
+	</select>
+	<br />
 	<input type="submit" value="Thêm"/>
 </form>
 @Model.Chuoi

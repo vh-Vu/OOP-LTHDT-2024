@@ -21,22 +21,33 @@ namespace OOP_LTHDT_2024.Pages
 		public int MatHang { get; set; }
 		public string Chuoi { get; set; } = string.Empty;
         private IXuLySanPham _xuLySanPham;
-        private IXuLyMatHang xuLyMatHang;
+        private IXuLyMatHang _xuLyMatHang;
+        public List<MatHang> DsMatHang { get; set; }
 
         public MH_ThemSanPhamModel() : base() {
             _xuLySanPham = ObjectCreater.TaoDoiTuongXuLySanPham();
+			_xuLyMatHang = ObjectCreater.TaoDoiTuongXuLyMatHang();
 		}
         public void OnGet()
         {
             Chuoi = "Vui long nhap san pham";
+            DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
+            if(DsMatHang.Count == 0)
+            {
+                Chuoi = "Khong co mat hang kha dung, vui long tao mat hang truoc"; return;
+            }
         }
 
 		public void OnPost()
         {
             try
             {
+				DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
+                if (DsMatHang.Count == 0) throw new Exception("Khong co mat hang kha dung, vui long tao mat hang truoc");
+
 				SanPham sanPham = new SanPham(TenSanPham, Gia, HanSuDung, NamSanXuat, CongTySanXuat, MatHang);
 				_xuLySanPham.ThemSanPham(sanPham);
+                _xuLyMatHang.ThemSanPhamVaoMatHang(sanPham);
 				Chuoi = "Them thanh cong";
 			}
             catch (Exception ex)

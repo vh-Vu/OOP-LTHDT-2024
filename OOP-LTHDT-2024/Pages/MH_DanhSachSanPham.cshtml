@@ -32,7 +32,14 @@
 				<td>@sanPham.NamSanXuat</td>
 				<td>@sanPham.HanSuDung</td>
 				<td>@sanPham.CongTySanXuat</td>
-				<td>@sanPham.MatHang</td>
+				<td>@{
+						string tenMH = "";
+						foreach(var mh in Model.DanhSachMatHang){
+							if (mh.MaMH == sanPham.MatHang) { tenMH = mh.TenMH; break; }
+						}
+						@tenMH;
+						}
+				</td>
 				<td class="action">
 					<a href="MH_Sua_SanPham?masp=@sanPham.MaSP">Sửa</a>
 					<a href="MH_Xoa_SanPham?masp=@sanPham.MaSP">Xoá</a>

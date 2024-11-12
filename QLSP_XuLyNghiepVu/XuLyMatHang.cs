@@ -46,7 +46,7 @@ namespace QLSP_XuLyNghiepVu
 		}
 		public void XoaMatHang(MatHang matHang)
 		{
-			var dsMatHang = DocDanhSachMatHang();
+			var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
 			for (int i = 0; i < dsMatHang.Count; i++)
 			{
 				if (dsMatHang[i].MaMH == matHang.MaMH)
@@ -58,8 +58,8 @@ namespace QLSP_XuLyNghiepVu
 		}
 		public void ThemSanPhamVaoMatHang(SanPham sanPham)
 		{
-			var dsMatHang = DocDanhSachMatHang();
-			for(int i = 0;i < dsMatHang.Count; i++)
+			var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
+			for (int i = 0;i < dsMatHang.Count; i++)
 			{
 				if (dsMatHang[i].MaMH== sanPham.MatHang)
 				{
@@ -95,6 +95,15 @@ namespace QLSP_XuLyNghiepVu
 				if (MatHang.MaMH == maMH) return MatHang;
 			}
 			return null;
+		}
+		public bool MaMatHangTonTai(int maMH)
+		{
+			var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
+			foreach (var MatHang in dsMatHang)
+			{
+				if (MatHang.MaMH == maMH) return true;
+			}
+			return false;
 		}
 	}
 }

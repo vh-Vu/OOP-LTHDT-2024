@@ -9,7 +9,9 @@ namespace OOP_LTHDT_2024.Pages
     {
 
         public SanPham SanPham { get; set; }
+        public List<MatHang> DsMatHang { get; set; }  
 		private IXuLySanPham _xuLySanPham;
+        private IXuLyMatHang _xuLyMatHang;
         
 		[BindProperty (SupportsGet =true)]
 		public int MaSp { get; set; }
@@ -31,6 +33,7 @@ namespace OOP_LTHDT_2024.Pages
 		public string Chuoi = string.Empty;
         public MH_Sua_SanPhamModel() : base() {
             _xuLySanPham = ObjectCreater.TaoDoiTuongXuLySanPham();
+            _xuLyMatHang = ObjectCreater.TaoDoiTuongXuLyMatHang();
         }
 
 		public void OnGet()
@@ -42,6 +45,9 @@ namespace OOP_LTHDT_2024.Pages
             }
             SanPham = _xuLySanPham.DocSanPham(MaSp);
             if (SanPham == null) Chuoi = "Khong tim thay san pham";
+            else
+				DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
+
 		}
         public void OnPost()
         {
@@ -53,19 +59,25 @@ namespace OOP_LTHDT_2024.Pages
                     return;
                 }
                 SanPham = _xuLySanPham.DocSanPham(MaSp);
-                if (SanPham == null) Chuoi = "Khong tim thay san pham";
-				else
+                if (SanPham == null) { Chuoi = "Khong tim thay san pham"; return; }
+				DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
+				if (SanPham.MatHang != MatHang)
                 {
+                    if(!_xuLyMatHang.MaMatHangTonTai(MatHang))
+                    {
+						Chuoi = "Mat hang khong ton tai"; return;
+					}
+                    _xuLyMatHang.SanPhamThayDoiMatHang(SanPham, MatHang);
+                }
                     SanPham.Ten = TenSanPham;
                     SanPham.Gia = Gia;
                     SanPham.NamSanXuat = NamSanXuat;
-                    SanPham.MatHang = MatHang;
                     SanPham.HanSuDung = HanSuDung;
                     SanPham.CongTySanXuat = CongTySanXuat;
                     SanPham.KiemTraDieuKien();
 					_xuLySanPham.SuaSanPham(SanPham);
                     Response.Redirect("/MH_DanhSachSanPham");
-                }
+                
             }
             catch (Exception e)
             {

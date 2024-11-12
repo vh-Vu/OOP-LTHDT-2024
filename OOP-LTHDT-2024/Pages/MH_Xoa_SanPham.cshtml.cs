@@ -9,6 +9,8 @@ namespace OOP_LTHDT_2024.Pages
     {
 		public SanPham SanPham { get; set; }
 		private IXuLySanPham _xuLySanPham;
+		private IXuLyMatHang _xuLyMatHang;
+
 
 		[BindProperty(SupportsGet = true)]
 		public int MaSp { get; set; }
@@ -17,6 +19,7 @@ namespace OOP_LTHDT_2024.Pages
 		public MH_Xoa_SanPhamModel() : base()
 		{
 			_xuLySanPham = ObjectCreater.TaoDoiTuongXuLySanPham();
+			_xuLyMatHang = ObjectCreater.TaoDoiTuongXuLyMatHang();
 		}
 
 		public void OnGet()
@@ -43,6 +46,7 @@ namespace OOP_LTHDT_2024.Pages
 				else
 				{
 					_xuLySanPham.XoaSanPham(SanPham);
+					_xuLyMatHang.XoaSanPhamRaKhoiMatHang(SanPham);
 					Response.Redirect("/MH_DanhSachSanPham");
 				}
 			}

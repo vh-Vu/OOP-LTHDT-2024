@@ -9,20 +9,25 @@ namespace OOP_LTHDT_2024.Pages
     public class MH_DanhSachSanPhamModel : PageModel
     {
         public List<SanPham> DanhSachSanPham { get; set; }
-        public IXuLySanPham _xuLySanPham;
+		public List<MatHang> DanhSachMatHang { get; set; }
+
+		private IXuLySanPham _xuLySanPham;
+        private IXuLyMatHang _xuLyMatHang;
         [BindProperty]
 		public string Keyword { get; set; }
 		public string chuoi = string.Empty;
         public MH_DanhSachSanPhamModel() : base()
         {
             _xuLySanPham = ObjectCreater.TaoDoiTuongXuLySanPham();
-        }
+			_xuLyMatHang = ObjectCreater.TaoDoiTuongXuLyMatHang();
+
+		}
         public void OnGet()
         {
 			try
 			{
 				DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham();
-
+				DanhSachMatHang = _xuLyMatHang.DocDanhSachMatHang();
 			}
 			catch (Exception ex)
 			{
@@ -35,8 +40,10 @@ namespace OOP_LTHDT_2024.Pages
             {
 				if (string.IsNullOrEmpty(Keyword)) Keyword = "";
 				DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham(Keyword);
+				DanhSachMatHang = _xuLyMatHang.DocDanhSachMatHang();
 
-			}catch(Exception ex)
+			}
+			catch (Exception ex)
             {
                 chuoi = ex.Message;
             }
