@@ -32,16 +32,19 @@ namespace OOP_LTHDT_2024.Pages
             {
 				if (MaMH == 0)
 				{
-					Chuoi = "Ma mat hang khong hop le";
-					return;
+					throw new Exception ("Ma mat hang khong hop le");
 				}
 				MatHang = _xuLyMatHang.DocMatHang(MaMH);
-				if (MatHang == null) Chuoi = "Mat hang khong ton tai";
-                else
+                if (MatHang == null)
                 {
-                    _xuLyMatHang.XoaMatHang(MatHang);
-                    Response.Redirect("/MH_DanhSachMatHang");
+					throw new Exception("Mat hang khong ton tai");
                 }
+				if (MatHang.DanhSachSanPham.Count > 0)
+				{
+					throw new Exception("Con san pham trong mat hang vui long chinh sua truoc khi xoa");
+                }
+				_xuLyMatHang.XoaMatHang(MatHang);
+				Response.Redirect("/MH_DanhSachMatHang");
 			}
             catch (Exception ex)
             {

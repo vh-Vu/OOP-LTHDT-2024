@@ -32,20 +32,14 @@ namespace OOP_LTHDT_2024.Pages
         public void OnPost() {
             try
             {
-				if (MaMH == 0)
-				{
-					Chuoi = "Ma mat hang khong hop le";
-					return;
-				}
-                if (string.IsNullOrEmpty(TenMatHang)) throw new Exception("Ten mat hang khong hop le");
+				if (MaMH == 0)  throw new Exception("Ma mat hang khong hop le");
+                if (string.IsNullOrEmpty(TenMatHang))       throw new Exception("Ten mat hang khong hop le");
 				MatHang = _xuLyMatHang.DocMatHang(MaMH);
-				if (MatHang == null) Chuoi = "Khong tim thay mat hang nay";
-                else
-                {
-                    MatHang.TenMH = TenMatHang;
-                    _xuLyMatHang.SuaMatHang(MatHang);
-                    Response.Redirect("/MH_DanhSachMatHang");
-                }
+				if (MatHang == null)       throw new Exception("Khong tim thay mat hang nay");
+
+                MatHang.TenMH = TenMatHang;
+                _xuLyMatHang.SuaMatHang(MatHang);
+                Response.Redirect("/MH_DanhSachMatHang");
 
 			}
 			catch (Exception ex)

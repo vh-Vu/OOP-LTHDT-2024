@@ -16,7 +16,7 @@
 			if (string.IsNullOrEmpty(congTySanXuat))  throw new Exception("Ten cong ty khong hop le");
 			if (HanSuDung < DateOnly.FromDateTime(DateTime.Now)) throw new Exception("Han su dung khong hop le");
 			int currentYear = DateTime.Now.Year;
-			if(namSanXuat> currentYear) throw new Exception("Nam san xuat khong hop le");
+			if(namSanXuat> currentYear || namSanXuat<1990) throw new Exception("Nam san xuat khong hop le");
 			if (matHang <= 0) throw new Exception("Mat hang khong hop le");
 			
 			
@@ -34,7 +34,7 @@
 			if (string.IsNullOrEmpty(this.CongTySanXuat)) throw new Exception("Ten cong ty khong hop le");
 			if (this.HanSuDung < DateOnly.FromDateTime(DateTime.Now)) throw new Exception("Han su dung khong hop le");
 			int currentYear = DateTime.Now.Year;
-			if (this.NamSanXuat > currentYear) throw new Exception("Nam san xuat khong hop le");
+			if (this.NamSanXuat > currentYear || this.NamSanXuat < 1990) throw new Exception("Nam san xuat khong hop le");
 			if (this.MatHang <= 0) throw new Exception("Mat hang khong hop le");
 		}
 	}

@@ -34,7 +34,7 @@ namespace OOP_LTHDT_2024.Pages
             DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
             if(DsMatHang.Count == 0)
             {
-                Chuoi = "Khong co mat hang kha dung, vui long tao mat hang truoc"; return;
+                Chuoi = "Khong co mat hang kha dung, vui long tao mat hang truoc";
             }
         }
 

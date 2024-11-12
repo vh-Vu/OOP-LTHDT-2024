@@ -36,19 +36,12 @@ namespace OOP_LTHDT_2024.Pages
 		{
 			try
 			{
-				if (MaSp == 0)
-				{
-					Chuoi = "Ma san pham khong hop le";
-					return;
-				}
+				if (MaSp == 0) throw new Exception("Ma san pham khong hop le");
 				SanPham = _xuLySanPham.DocSanPham(MaSp);
-				if (SanPham == null) Chuoi = "Khong tim thay san pham";
-				else
-				{
-					_xuLySanPham.XoaSanPham(SanPham);
-					_xuLyMatHang.XoaSanPhamRaKhoiMatHang(SanPham);
-					Response.Redirect("/MH_DanhSachSanPham");
-				}
+				if (SanPham == null) throw new Exception("Khong tim thay san pham");
+				_xuLySanPham.XoaSanPham(SanPham);
+				_xuLyMatHang.XoaSanPhamRaKhoiMatHang(SanPham);
+				Response.Redirect("/MH_DanhSachSanPham");
 			}
 			catch (Exception e)
 			{

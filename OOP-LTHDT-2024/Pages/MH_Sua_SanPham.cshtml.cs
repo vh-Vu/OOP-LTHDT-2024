@@ -53,30 +53,27 @@ namespace OOP_LTHDT_2024.Pages
         {
             try
             {
-                if (MaSp == 0)
-                {
-                    Chuoi = "Ma san pham khong hop le";
-                    return;
-                }
+                if (MaSp == 0) throw new Exception("Ma san pham khong hop le");
+                   
                 SanPham = _xuLySanPham.DocSanPham(MaSp);
-                if (SanPham == null) { Chuoi = "Khong tim thay san pham"; return; }
-				DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
+
+                if (SanPham == null) throw new Exception("Khong tim thay san pham");
+                DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
+
 				if (SanPham.MatHang != MatHang)
                 {
-                    if(!_xuLyMatHang.MaMatHangTonTai(MatHang))
-                    {
-						Chuoi = "Mat hang khong ton tai"; return;
-					}
+                    if(!_xuLyMatHang.MaMatHangTonTai(MatHang))	throw new Exception ("Mat hang khong ton tai");
                     _xuLyMatHang.SanPhamThayDoiMatHang(SanPham, MatHang);
                 }
-                    SanPham.Ten = TenSanPham;
-                    SanPham.Gia = Gia;
-                    SanPham.NamSanXuat = NamSanXuat;
-                    SanPham.HanSuDung = HanSuDung;
-                    SanPham.CongTySanXuat = CongTySanXuat;
-                    SanPham.KiemTraDieuKien();
-					_xuLySanPham.SuaSanPham(SanPham);
-                    Response.Redirect("/MH_DanhSachSanPham");
+
+                SanPham.Ten = TenSanPham;
+                SanPham.Gia = Gia;
+                SanPham.NamSanXuat = NamSanXuat;
+                SanPham.HanSuDung = HanSuDung;
+                SanPham.CongTySanXuat = CongTySanXuat;
+                SanPham.KiemTraDieuKien();
+				_xuLySanPham.SuaSanPham(SanPham);
+                Response.Redirect("/MH_DanhSachSanPham");
                 
             }
             catch (Exception e)

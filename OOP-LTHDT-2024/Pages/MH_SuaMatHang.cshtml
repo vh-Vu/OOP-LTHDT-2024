@@ -2,12 +2,12 @@
 @model OOP_LTHDT_2024.Pages.MH_SuaMatHangModel
 @{
 }
-@if (Model.MatHang != null && string.IsNullOrEmpty(Model.Chuoi))
+@if (Model.MatHang != null)
 {
 	<form method="post">
 		<label for="TenMatHang">Tên mặt hàng:</label>
 		<input type="text" name="TenMatHang" value="@Model.MatHang.TenMH" /> <br />
 		<input type="submit" value="Sửa" />
 	</form>
-}else
+}
 @Model.Chuoi
