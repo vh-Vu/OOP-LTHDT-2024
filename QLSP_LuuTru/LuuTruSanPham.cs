@@ -4,18 +4,20 @@ using System.Runtime.CompilerServices;
 
 namespace QLSP_LuuTru
 {
-	public class LuuTruSanPham: ILuuTruSanPham
+	public class LuuTruSanPham: ILuuTru<SanPham>
 	{
 		private const string FilePath = @"D:\sanpham.json";
-		public void LuuSanPham(SanPham s)
+		private const string nextID = @"D:\SPID.txt";
+		public void Them(SanPham s)
 		{
 			List<SanPham> dsSanPham = DocDanhSach();
-			int maxId = 0;
-			foreach(SanPham item in  dsSanPham)
-			{
-				if(item.MaSP >maxId) maxId = item.MaSP;
-			}
-			s.MaSP = maxId+1;
+			StreamReader reader = new StreamReader(nextID);
+			int id = int.Parse(reader.ReadToEnd());
+			reader.Close();
+			s.MaSP = id;
+			StreamWriter writer = new StreamWriter(nextID);
+			writer.Write(++id);
+			writer.Close();
 			dsSanPham.Add(s);
 			LuuDanhSach(dsSanPham);
 		}
@@ -35,7 +37,7 @@ namespace QLSP_LuuTru
 			file.Write(dsSanPhamMoi);
 			file.Close();
 		}
-		public SanPham TimSanPhamTheoTen(string ten)
+		public SanPham TimTheoTen(string ten)
 		{
 			List<SanPham> dsSanPham = DocDanhSach();
 			foreach (SanPham item in dsSanPham)

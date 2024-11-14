@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace QLSP_LuuTru
 {
-	public class LuuTruMatHang : ILuuTruMatHang
+	public class LuuTruMatHang : ILuuTru<MatHang>
 	{
 		string filepath = @"D:\mathang.json";
+		string nextID = @"D:\MHID.txt";
 
-		public List<MatHang> DocDanhSachMatHang()
+		public List<MatHang> DocDanhSach()
 		{
 			StreamReader file = new StreamReader(filepath);
 			string data = file.ReadToEnd();
@@ -23,24 +24,36 @@ namespace QLSP_LuuTru
 
 		}
 
-		public void ThemMatHang(MatHang matHang)
+		public void Them(MatHang matHang)
 		{
-			int maxId = 0;
-			var dsMatHang = DocDanhSachMatHang();
-			int soLuongMatHang = dsMatHang.Count;
-			if (soLuongMatHang == 0) maxId = 1;
-			else maxId = dsMatHang[soLuongMatHang - 1].MaMH+1;
-			matHang.MaMH = maxId;
+			StreamReader reader = new StreamReader(nextID);
+			int id = int.Parse(reader.ReadToEnd());
+			reader.Close();
+			matHang.MaMH= id;
+			StreamWriter writer = new StreamWriter(nextID);
+			writer.Write(++id);
+			writer.Close();
+			var dsMatHang = DocDanhSach();
 			dsMatHang.Add(matHang);
-			LuuDanhSachMatHang(dsMatHang);
+			LuuDanhSach(dsMatHang);
 		}
 
-		public void LuuDanhSachMatHang(List<MatHang> ds)
+		public void LuuDanhSach(List<MatHang> ds)
 		{
 			string dsSanPhamMoi = JsonConvert.SerializeObject(ds);
 			StreamWriter file = new StreamWriter(filepath);
 			file.Write(dsSanPhamMoi);
 			file.Close();
+		}
+
+		public MatHang TimTheoTen(string ten)
+		{
+			List<MatHang> dsMatHang = DocDanhSach();
+			foreach (MatHang item in dsMatHang)
+			{
+				if (item.TenMH == ten) return item;
+			}
+			return null;
 		}
 	}
 }

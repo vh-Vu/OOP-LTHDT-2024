@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace QLSP_LuuTru
 {
-	public interface ILuuTruMatHang
+	public interface ILuuTru<T>
 	{
-		List<MatHang> DocDanhSachMatHang();
-		void ThemMatHang(MatHang matHang);
-		void LuuDanhSachMatHang(List<MatHang> ds);
+		List<T> DocDanhSach();
+		void LuuDanhSach(List<T> ds);
+		T TimTheoTen(string ten);
+
+		void Them(T t);
+
 	}
 }
