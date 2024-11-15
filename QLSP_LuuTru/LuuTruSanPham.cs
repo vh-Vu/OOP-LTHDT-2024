@@ -1,23 +1,20 @@
-﻿using QLSP_Entity;
+﻿/*using QLSP_Entity;
 using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
 
 namespace QLSP_LuuTru
 {
-	public class LuuTruSanPham: ILuuTru<SanPham>
+	*//*public class LuuTruSanPham: ILuuTru<SanPham>
 	{
 		private const string FilePath = @"D:\sanpham.json";
 		private const string nextID = @"D:\SPID.txt";
 		public void Them(SanPham s)
 		{
-			List<SanPham> dsSanPham = DocDanhSach();
-			StreamReader reader = new StreamReader(nextID);
-			int id = int.Parse(reader.ReadToEnd());
-			reader.Close();
+			int id = int.Parse(File.ReadAllText(nextID));
 			s.MaSP = id;
-			StreamWriter writer = new StreamWriter(nextID);
-			writer.Write(++id);
-			writer.Close();
+			File.WriteAllText(nextID, (++id).ToString());
+
+			List<SanPham> dsSanPham = DocDanhSach();
 			dsSanPham.Add(s);
 			LuuDanhSach(dsSanPham);
 		}
@@ -46,5 +43,20 @@ namespace QLSP_LuuTru
 			}
 			return null;
 		}
-	}
+
+		public void Xoa(int ma)
+		{
+			List<SanPham> dsSanPham = DocDanhSach();
+			for (int i = 0; i < dsSanPham.Count; i++)
+			{
+				if (dsSanPham[i].MaSP == ma)
+				{
+					dsSanPham.Remove(dsSanPham[i]);
+					break;
+				}
+			}
+			LuuDanhSach(dsSanPham);
+		}
+	}*//*
 }
+*/

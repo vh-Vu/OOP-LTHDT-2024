@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿/*using Newtonsoft.Json;
 using QLSP_Entity;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLSP_LuuTru
 {
-	public class LuuTruMatHang : ILuuTru<MatHang>
+	*//*public class LuuTruMatHang : ILuuTru<MatHang>
 	{
 		string filepath = @"D:\mathang.json";
 		string nextID = @"D:\MHID.txt";
@@ -26,13 +26,10 @@ namespace QLSP_LuuTru
 
 		public void Them(MatHang matHang)
 		{
-			StreamReader reader = new StreamReader(nextID);
-			int id = int.Parse(reader.ReadToEnd());
-			reader.Close();
+			int id = int.Parse(File.ReadAllText(nextID));
 			matHang.MaMH= id;
-			StreamWriter writer = new StreamWriter(nextID);
-			writer.Write(++id);
-			writer.Close();
+			File.WriteAllText(nextID, (++id).ToString());
+
 			var dsMatHang = DocDanhSach();
 			dsMatHang.Add(matHang);
 			LuuDanhSach(dsMatHang);
@@ -55,5 +52,20 @@ namespace QLSP_LuuTru
 			}
 			return null;
 		}
-	}
+
+		public void Xoa(int ma)
+		{
+			List<MatHang> ds = DocDanhSach();
+			for (int i = 0; i < ds.Count; i++)
+			{
+				if (ds[i].MaMH == ma)
+				{
+					ds.Remove(ds[i]);
+					break;
+				}
+			}
+			LuuDanhSach(ds);
+		}
+	}*//*
 }
+*/

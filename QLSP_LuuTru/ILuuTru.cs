@@ -11,9 +11,9 @@ namespace QLSP_LuuTru
 	{
 		List<T> DocDanhSach();
 		void LuuDanhSach(List<T> ds);
-		T TimTheoTen(string ten);
-
+		T? TimTheoTen(string ten);
 		void Them(T t);
+		void Xoa(int ma);
 
 	}
 }
