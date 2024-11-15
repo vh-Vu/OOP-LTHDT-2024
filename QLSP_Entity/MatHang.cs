@@ -6,16 +6,29 @@ using System.Threading.Tasks;
 
 namespace QLSP_Entity
 {
-	public class MatHang
+	public class MatHang: IEntity
 	{
-		public int MaMH {  get; set; }
-		public string TenMH { get; set; }
+		public int Ma {  get; set; }
+		public string Ten { get; set; }
 		public List<int> DanhSachSanPham { get; set; }
 		public MatHang(string TenMH) { 
 			if(string.IsNullOrEmpty(TenMH))
 			{ throw new Exception("Ten mat hang khong hop le"); }
-			this.TenMH = TenMH;	
+			this.Ten = TenMH;
 			DanhSachSanPham = new List<int>();
+		}
+
+		public void XoaSanPham(int s)
+		{
+			if (!this.DanhSachSanPham.Contains(s))
+				throw new Exception("San pham khong co trong danh sach");
+			this.DanhSachSanPham.Remove(s);
+		}
+		public void ThemSanPham(int s)
+		{
+			if (this.DanhSachSanPham.Contains(s))
+				throw new Exception("San pham da ton tai");
+			this.DanhSachSanPham.Add(s);
 		}
 	}
 }
