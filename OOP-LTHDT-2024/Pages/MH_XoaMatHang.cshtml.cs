@@ -8,9 +8,8 @@ namespace OOP_LTHDT_2024.Pages
     public class MH_XoaMatHangModel : PageModel
     {
         private IXuLyMatHang _xuLyMatHang;
-        public MatHang MatHang { get; set; }
-        [BindProperty(SupportsGet =true)]
-        public int MaMH { get; set; }
+		[BindProperty(SupportsGet = true)] public int MaMH { get; set; }
+		public MatHang MatHang { get; set; }
         public string Chuoi = string.Empty;
 		public MH_XoaMatHangModel() :base() {
             _xuLyMatHang = ObjectCreater.TaoDoiTuongXuLyMatHang();
