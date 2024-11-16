@@ -13,10 +13,9 @@ namespace QLSP_XuLyNghiepVu
 		List<MatHang> DocDanhSachMatHang(string Keyword = "");
 		void SuaMatHang(MatHang matHang);
 		void XoaMatHang(MatHang matHang);
-		void ThemSanPhamVaoMatHang(SanPham sanPham);
-		void XoaSanPhamRaKhoiMatHang(SanPham sanPham);
-		void SanPhamThayDoiMatHang(SanPham sanPham, int maMatHangMoi);
+		void ThemSanPhamVaoMatHang(int maMh, int maSanPham);
+		void XoaSanPhamRaKhoiMatHang(int maMh, int maSanPham);
+		void SanPhamThayDoiMatHang(int maMhCu, int maMhMoi, int maSanPham);
 		MatHang DocMatHang(int maMH);
-		bool MaMatHangTonTai(int maMH);
 	}
 }

@@ -6,22 +6,27 @@ namespace QLSP_XuLyNghiepVu
 {
 	public class XuLySanPham : IXuLySanPham
 	{
-		private ILuuTruSanPham _luuTruSanPham;
-		public XuLySanPham(ILuuTruSanPham LuuSanPham)
+		private ILuuTru<SanPham> _luuTruSanPham;
+		private IXuLyMatHang _xulyMatHang;
+		public XuLySanPham(ILuuTru<SanPham> LuuSanPham, IXuLyMatHang xulyMatHang)
 		{
 			_luuTruSanPham = LuuSanPham;
+			_xulyMatHang = xulyMatHang;
 		}
 		public void ThemSanPham(SanPham s)
 		{
-			SanPham sp =  _luuTruSanPham.TimSanPhamTheoTen(s.Ten);
-			if (sp!=null)
-				throw new Exception("ID da ton tai");
-			_luuTruSanPham.LuuSanPham(s);
+			SanPham sp =  _luuTruSanPham.TimTheoTen(s.Ten);
+
+			if (sp!=null)	throw new Exception("ID da ton tai");
+			s.Ma = _luuTruSanPham.CapPhatID();
+			_xulyMatHang.ThemSanPhamVaoMatHang(s.MatHang,s.Ma);
+			_luuTruSanPham.Them(s);
 		}
 		public List<SanPham> DocDanhSachSanPham(string Keyword="")
 		{
 			var dsSanPham = _luuTruSanPham.DocDanhSach();
 			var ketQua = new List<SanPham>();
+
 			foreach(var SanPham in dsSanPham)
 			{
 				if(SanPham.Ten.Contains(Keyword)) ketQua.Add(SanPham);
@@ -32,34 +37,36 @@ namespace QLSP_XuLyNghiepVu
 		public void SuaSanPham(SanPham s)
 		{
 			var dsSanPham = _luuTruSanPham.DocDanhSach();
+			int p = -1;
+
 			for(int i = 0; i < dsSanPham.Count; i++)
 			{
-				if (dsSanPham[i].MaSP == s.MaSP)
+				if (dsSanPham[i].Ma == s.Ma)
 				{
-					dsSanPham[i] = s; break;
+					p = i;
+					continue;
 				}
+				if (dsSanPham[i].Ten == s.Ten) throw new Exception("Ten san pham da ton tai");
 			}
+
+			if(p==-1) throw new Exception("San pham khong ton tai");
+
+			if (dsSanPham[p].MatHang!= s.MatHang) _xulyMatHang.SanPhamThayDoiMatHang(dsSanPham[p].MatHang, s.MatHang, s.Ma);
+			
+			dsSanPham[p] = s;
 			_luuTruSanPham.LuuDanhSach(dsSanPham);
 		}
 		public void XoaSanPham(SanPham s)
 		{
-			var dsSanPham = _luuTruSanPham.DocDanhSach();
-			for (int i = 0; i < dsSanPham.Count; i++)
-			{
-				if (dsSanPham[i].MaSP == s.MaSP)
-				{
-					dsSanPham.Remove(dsSanPham[i]);
-					break;
-				}
-			}
-			_luuTruSanPham.LuuDanhSach(dsSanPham);
+			_xulyMatHang.XoaSanPhamRaKhoiMatHang(s.MatHang, s.Ma);
+			_luuTruSanPham.Xoa(s.Ma);
 		}
 		public SanPham DocSanPham(int maSP)
 		{
 			var dsSanPham = _luuTruSanPham.DocDanhSach();
 			foreach(var SanPham in dsSanPham)
 			{
-				if (SanPham.MaSP == maSP) return SanPham;
+				if (SanPham.Ma == maSP) return SanPham;
 			}
 			return null;
 		}
