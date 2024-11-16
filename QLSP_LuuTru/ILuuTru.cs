@@ -9,6 +9,7 @@ namespace QLSP_LuuTru
 {
 	public interface ILuuTru<T>
 	{
+		int CapPhatID();
 		List<T> DocDanhSach();
 		void LuuDanhSach(List<T> ds);
 		T? TimTheoTen(string ten);

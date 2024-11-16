@@ -17,12 +17,15 @@ namespace QLSP_LuuTru
 			this._filePath = filePath;
 			this._IDFile = IDFile;
 		}
-		public void Them(T t)
+
+		public int CapPhatID()
 		{
 			int id = int.Parse(File.ReadAllText(_IDFile));
-			t.Ma = id;
 			File.WriteAllText(_IDFile, (++id).ToString());
-
+			return id;
+		}
+		public void Them(T t)
+		{
 			List<T> dsSanPham = DocDanhSach();
 			dsSanPham.Add(t);
 			LuuDanhSach(dsSanPham);
