@@ -11,13 +11,16 @@ namespace QLSP_Entity
 		public int Ma {  get; set; }
 		public string Ten { get; set; }
 		public List<int> DanhSachSanPham { get; set; }
-		public MatHang(string TenMH) { 
-			if(string.IsNullOrEmpty(TenMH))
+		public MatHang(string Ten) {
+			CapNhat(Ten);
+		}
+		public void CapNhat(string Ten)
+		{
+			if (string.IsNullOrEmpty(Ten))
 			{ throw new Exception("Ten mat hang khong hop le"); }
-			this.Ten = TenMH;
+			this.Ten = Ten.Trim();
 			DanhSachSanPham = new List<int>();
 		}
-
 		public void XoaSanPham(int s)
 		{
 			if (!this.DanhSachSanPham.Contains(s))

@@ -11,21 +11,18 @@
 		public int MatHang { get; set; }
 		public SanPham(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
 		{
-
-			KiemTraDieuKien(ten, gia, HanSuDung, namSanXuat, congTySanXuat, matHang);
 			CapNhatSanPham(ten, gia, HanSuDung, namSanXuat, congTySanXuat, matHang);
 		}
 
 		public void CapNhatSanPham(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
 		{
-
 			KiemTraDieuKien(ten, gia, HanSuDung, namSanXuat, congTySanXuat, matHang);
 
-			this.Ten = ten;
+			this.Ten = ten.Trim();
 			this.Gia = gia;
 			this.HanSuDung = HanSuDung;
 			this.NamSanXuat = namSanXuat;
-			this.CongTySanXuat = congTySanXuat;
+			this.CongTySanXuat = congTySanXuat.Trim();
 			this.MatHang = matHang;
 		}
 
@@ -37,7 +34,7 @@
 			if (string.IsNullOrEmpty(congTySanXuat)) throw new Exception("Ten cong ty khong hop le");
 			if (HanSuDung < DateOnly.FromDateTime(DateTime.Now.Date)) throw new Exception("Han su dung khong hop le");
 			int currentYear = DateTime.Now.Year;
-			if (namSanXuat > currentYear || namSanXuat < 1990) throw new Exception("Nam san xuat khong hop le");
+			if (namSanXuat > currentYear || namSanXuat < 2000) throw new Exception("Nam san xuat khong hop le");
 			if (matHang <= 0) throw new Exception("Mat hang khong hop le");
 		}
 	}
