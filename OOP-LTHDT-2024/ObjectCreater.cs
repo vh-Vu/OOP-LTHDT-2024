@@ -1,4 +1,5 @@
-﻿using QLSP_LuuTru;
+﻿using QLSP_Entity;
+using QLSP_LuuTru;
 using QLSP_XuLyNghiepVu;
 
 namespace OOP_LTHDT_2024
@@ -7,12 +8,13 @@ namespace OOP_LTHDT_2024
 	{
 		public static IXuLySanPham TaoDoiTuongXuLySanPham()
 		{
-			ILuuTruSanPham sp = new LuuTruSanPham();
-			return new XuLySanPham(sp);
+			ILuuTru<SanPham> sp = new LuuTru<SanPham>(@"D:\sanpham.json", @"D:\SPID.txt");
+
+			return new XuLySanPham(sp, TaoDoiTuongXuLyMatHang());
 		}
 		public static IXuLyMatHang TaoDoiTuongXuLyMatHang()
 		{
-			ILuuTruMatHang mh = new LuuTruMatHang();
+			ILuuTru<MatHang> mh = new LuuTru<MatHang>(@"D:\mathang.json", @"D:\MHID.txt");
 			return new XuLyMatHang(mh);
 		}
 	}
