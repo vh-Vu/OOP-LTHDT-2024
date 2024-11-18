@@ -10,16 +10,22 @@ namespace QLSP_Entity
 	{
 		public int Ma {  get; set; }
 		public string Ten { get; set; }
+		public bool DaXoa { get; set; }
 		public List<int> DanhSachSanPham { get; set; }
 		public MatHang(string Ten) {
 			CapNhat(Ten);
+			DaXoa = false;
+			DanhSachSanPham = new List<int>();
 		}
-		public void CapNhat(string Ten)
+		public static void KiemTraDieuKien(string Ten)
 		{
 			if (string.IsNullOrEmpty(Ten))
 			{ throw new Exception("Ten mat hang khong hop le"); }
+		}
+		public void CapNhat(string Ten)
+		{
+			KiemTraDieuKien(Ten);
 			this.Ten = Ten.Trim();
-			DanhSachSanPham = new List<int>();
 		}
 		public void XoaSanPham(int s)
 		{

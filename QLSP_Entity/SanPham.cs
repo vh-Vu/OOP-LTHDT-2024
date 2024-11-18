@@ -4,6 +4,7 @@
 	{
 		public int Ma { get; set; }
 		public string Ten { get; set; }
+		public bool DaXoa { get; set; }
 		public int Gia { get; set; }
 		public DateOnly HanSuDung { get; set; }
 		public int NamSanXuat { get; set; }
@@ -12,6 +13,7 @@
 		public SanPham(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
 		{
 			CapNhatSanPham(ten, gia, HanSuDung, namSanXuat, congTySanXuat, matHang);
+			DaXoa = false;
 		}
 
 		public void CapNhatSanPham(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)

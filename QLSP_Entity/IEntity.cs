@@ -10,5 +10,6 @@ namespace QLSP_Entity
 	{
 		int Ma { get; set; }
 		string Ten { get; set; }
+		bool DaXoa { get; set; }
 	}
 }

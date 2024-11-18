@@ -11,22 +11,38 @@ namespace QLSP_Entity
 		public int Ma {  get; set; }
 		public DateOnly NgayTaoHD { get; set; }
 		public string Ten { get; set; }
-		public string SDT { get; set; }
+		public bool DaXoa { get; set; }
+		public int SDT { get; set; }
 		public string DiaChi {  get; set; }
-		public List<ChiTietHoaDon> ChiTietHD { get; set; }
-		public HoaDon(string TenDoiTac, string SDT, string DiaChi, List<ChiTietHoaDon> ChiTietHD) { 
-			this.Ten = TenDoiTac;
-			this.SDT = SDT;
-			this.DiaChi = DiaChi;
-			this.ChiTietHD = ChiTietHD;
-			XacThucHoaDon();
+		public List<SanPhamHoaDon> ChiTietHD { get; set; }
+		public long ThanhTien { get; set; }
+		public HoaDon(string Ten, DateOnly NgayTaoHD, int SDT, string DiaChi) { 
+			CapNhat(Ten, NgayTaoHD, SDT, DiaChi);
+			DaXoa = false;
 		}
-		public void XacThucHoaDon()
+		public static void XacThucHoaDon(string Ten, DateOnly NgayTaoHD, int SDT, string DiaChi)
 		{
 			if (string.IsNullOrEmpty(Ten)) throw new Exception("Ten Doi Tac khong hop le");
-			if (string.IsNullOrEmpty(SDT)) throw new Exception("So dien thoai khong hop le");
+			int InvoiceYear = NgayTaoHD.Year;
+			if (InvoiceYear < 2000 || InvoiceYear > 2025) throw new Exception("Ngay tao hoa don khong hop le");
+			if (SDT<1) throw new Exception("So dien thoai khong hop le");
 			if (string.IsNullOrEmpty(DiaChi)) throw new Exception("Dia chi khong hop le");
-			if (ChiTietHD.Count == 0) throw new Exception("Danh sach san pham trong hoa don khong hop le");
+		}
+		public void CapNhat(string Ten, DateOnly NgayTaoHD, int SDT, string DiaChi)
+		{
+			XacThucHoaDon(Ten, NgayTaoHD, SDT, DiaChi);
+			this.Ten = Ten.Trim();
+			this.SDT = SDT;
+			this.DiaChi = DiaChi.Trim(); 
+			this.NgayTaoHD = NgayTaoHD;
+		}
+
+		public void CapNhatThanhTien()
+		{
+			foreach(var sp in ChiTietHD)
+			{
+				this.ThanhTien += sp.ThanhTien;
+			}
 		}
 	}
 }
