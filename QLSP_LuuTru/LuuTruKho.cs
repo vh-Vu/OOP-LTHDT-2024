@@ -11,7 +11,7 @@ namespace QLSP_LuuTru
 {
 	public class LuuTruKho: ILuuTruKho
     {
-		string _filePath = @"H:\Kho.json";
+		string _filePath = @"Data\Kho.json";
 		public void LuuDanhSach(List<SanPhamLuuKho> dsspKho)
 		{
 			StreamWriter file = new StreamWriter(_filePath);

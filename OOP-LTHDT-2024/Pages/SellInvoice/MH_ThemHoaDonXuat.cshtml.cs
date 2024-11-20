@@ -41,7 +41,7 @@ namespace OOP_LTHDT_2024.Pages.SellInvoice
 				_xuLyHoaDon.ThemHoaDon(HD,SoLuong);
 
 				Chuoi = "Thêm thành công!";
-				Message = "Bạn cần xác nhận nhập hàng ở giao diện quản lý Danh Sách Hóa Đơn";
+				Message = "Bạn cần xác nhận xuất hàng ở giao diện quản lý Danh Sách Hóa Đơn";
 
 
 			}

@@ -8,13 +8,13 @@ namespace OOP_LTHDT_2024
 	{
 		public static IXuLySanPham TaoDoiTuongXuLySanPham()
 		{
-			ILuuTru<SanPham> sp = new LuuTru<SanPham>(@"D:\sanpham.json", @"D:\SPID.txt");
+			ILuuTru<SanPham> sp = new LuuTru<SanPham>(@"Data\sanpham.json", @"Data\SPID.txt");
 
 			return new XuLySanPham(sp, TaoDoiTuongXuLyMatHang(), TaoDoiTuongXuLyKho());
 		}
 		public static IXuLyMatHang TaoDoiTuongXuLyMatHang()
 		{
-			ILuuTru<MatHang> mh = new LuuTru<MatHang>(@"D:\mathang.json", @"D:\MHID.txt");
+			ILuuTru<MatHang> mh = new LuuTru<MatHang>(@"Data\mathang.json", @"Data\MHID.txt");
 			return new XuLyMatHang(mh);
 		}
 		public static IXuLySanPhamHoaDon TaoDoiTuongXuLySanPhamHoaDon()
@@ -23,12 +23,12 @@ namespace OOP_LTHDT_2024
 		}
 		public static IXuLyHoaDon TaoDoiTuongXuLyHoaDonNhap()
 		{
-			ILuuTru<HoaDon> hd = new LuuTru<HoaDon>(@"H:\HDM.json", @"H:\HDMID.txt");
+			ILuuTru<HoaDon> hd = new LuuTru<HoaDon>(@"Data\HoaDonNhap.json", @"Data\HDNID.txt");
 			return new XuLyHoaDon(hd, TaoDoiTuongXuLySanPhamHoaDon(), TaoDoiTuongXuLyKho());
 		}
 		public static IXuLyHoaDon TaoDoiTuongXuLyHoaDonXuat()
 		{
-            ILuuTru<HoaDon> hd = new LuuTru<HoaDon>(@"H:\HDB.json", @"H:\HDBID.txt");
+            ILuuTru<HoaDon> hd = new LuuTru<HoaDon>(@"Data\HoaDonXuat.json", @"Data\HDXID.txt");
             return new XuLyHoaDon(hd,TaoDoiTuongXuLySanPhamHoaDon(), TaoDoiTuongXuLyKho());
 		}
 
