@@ -14,6 +14,7 @@ namespace QLSP_XuLyNghiepVu
 		public SanPham DocSanPham(int maSP);
 		public void SuaSanPham(SanPham s);
 		public void XoaSanPham(SanPham s);
+		public List<SanPham> DocTatCaDanhSachSanPham();
 
 	}
 }

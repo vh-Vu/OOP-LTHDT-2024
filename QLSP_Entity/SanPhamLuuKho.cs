@@ -10,11 +10,13 @@ namespace QLSP_Entity
 	{
 		public int Ma {  get; set; }
 		public int TonKho {  get; set; }
-		public SanPhamLuuKho(int Ma, int TonKho)
+		public int MaHang { get; set; }
+		public SanPhamLuuKho(int Ma, int MaHang, int TonKho)
 		{
 			if (Ma <= 0) throw new Exception("Ma khong hop le");
 			this .Ma = Ma;
 			this.TonKho = TonKho;
+			this.MaHang = MaHang;
 		}
 		public void Nhap(int SoLuong)
 		{
@@ -22,7 +24,7 @@ namespace QLSP_Entity
 		}
 		public void Xuat(int SoLuong)
 		{
-			if (SoLuong > this.TonKho) throw new Exception($"Sản phẩm có mã \"${this.Ma}\" không đủ số lượng sản phẩm tồn dư trong kho");
+			if (SoLuong > this.TonKho) throw new Exception($"Sản phẩm có mã \"{this.Ma}\" không đủ số lượng sản phẩm tồn dư trong kho");
 			this.TonKho -= SoLuong;
 		}
 	}

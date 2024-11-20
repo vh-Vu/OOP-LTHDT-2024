@@ -18,7 +18,6 @@ namespace QLSP_Entity
 		{
 			this.SanPham = SanPham;
             this.SoLuong = SoLuong;
-			this.ThanhTien = SanPham.Gia * SoLuong;
 
         }
 
@@ -28,6 +27,10 @@ namespace QLSP_Entity
 			this.SoLuong = SoLuong;
 
         }
+		public void CapNhatThanhTien()
+		{
+			this.ThanhTien = this.SanPham.Gia * this.SoLuong;
+		}
 	
 	}
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using QLSP_Entity;
 using QLSP_XuLyNghiepVu;
 
-namespace OOP_LTHDT_2024.Pages
+namespace OOP_LTHDT_2024.Pages.Product
 {
     public class MH_Xoa_SanPhamModel : PageModel
     {
@@ -40,8 +40,7 @@ namespace OOP_LTHDT_2024.Pages
 				SanPham = _xuLySanPham.DocSanPham(MaSp);
 				if (SanPham == null) throw new Exception("Khong tim thay san pham");
 				_xuLySanPham.XoaSanPham(SanPham);
-				_xuLyMatHang.XoaSanPhamRaKhoiMatHang(SanPham);
-				Response.Redirect("/MH_DanhSachSanPham");
+				Response.Redirect("/Product/MH_DanhSachSanPham");
 			}
 			catch (Exception e)
 			{

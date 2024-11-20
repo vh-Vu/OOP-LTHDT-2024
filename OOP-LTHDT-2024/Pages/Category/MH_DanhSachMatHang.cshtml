@@ -1,5 +1,5 @@
 ﻿@page
-@model OOP_LTHDT_2024.Pages.MH_DanhSachMatHangModel
+@model OOP_LTHDT_2024.Pages.Category.MH_DanhSachMatHangModel
 @{
 }
 <div>
@@ -9,24 +9,26 @@
 		<input class="btn-self" type="submit" value="Tìm kiếm" />
 	</form>
 </div>
-
+<div>
+	<a href="MH_ThemMatHang">Thêm mặt hàng</a>
+</div>
 <div class="table-content">
 	<table>
 		<tr>
-			<td>Mã sản phẩm</td>
+			<td>Mã mặt hàng</td>
 			<td>Tên mặt hàng</td>
 			<td>Số lượng sản phẩm</td>
 			<td class="action">Hành động</td>
 		</tr>
-		@foreach (var sanPham in Model.DanhSachMatHang)
+		@foreach (var matHang in Model.DanhSachMatHang)
 		{
 			<tr>
-				<td>@sanPham.MaMH</td>
-				<td>@sanPham.TenMH</td>
-				<td>@sanPham.DanhSachSanPham.Count</td>
+				<td>@matHang.Ma</td>
+				<td>@matHang.Ten</td>
+				<td>@matHang.DanhSachSanPham.Count</td>
 				<td class="action">
-					<a href="MH_SuaMatHang?mamh=@sanPham.MaMH">Sửa</a>
-					<a href="MH_XoaMatHang?mamh=@sanPham.MaMH">Xoá</a>
+					<a href="MH_SuaMatHang?mamh=@matHang.Ma">Sửa</a>
+					<a href="MH_XoaMatHang?mamh=@matHang.Ma">Xoá</a>
 				</td>
 			</tr>
 		}

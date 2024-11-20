@@ -22,7 +22,7 @@ namespace QLSP_XuLyNghiepVu
 			var ketQua = new List<MatHang>();
 			foreach(var mh in dsMatHang)
 			{
-				if(mh.Ten.Contains(Keyword)) ketQua.Add(mh);
+				if(mh.Ten.Contains(Keyword) && !mh.DaXoa) ketQua.Add(mh);
 			}
 			return ketQua;
 		}
@@ -84,7 +84,7 @@ namespace QLSP_XuLyNghiepVu
 			var dsMatHang = _luuTruMatHang.DocDanhSach();
 			foreach (var MatHang in dsMatHang)
 			{
-				if (MatHang.Ma == maMH) return MatHang;
+				if (MatHang.Ma == maMH && !MatHang.DaXoa) return MatHang;
 			}
 			return null;
 		}

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using QLSP_Entity;
 using QLSP_XuLyNghiepVu;
 
-namespace OOP_LTHDT_2024.Pages
+namespace OOP_LTHDT_2024.Pages.Category
 {
     public class MH_ThemMatHangModel : PageModel
     {
@@ -17,15 +17,15 @@ namespace OOP_LTHDT_2024.Pages
         }
         public void OnGet()
         {
-			Chuoi = "Vui long ten mat hang";
-		}
+            Chuoi = "Vui long ten mat hang";
+        }
         public void OnPost()
         {
             try
             {
                 MatHang mh = new MatHang(TenMatHang);
                 _xuLyMatHang.ThemMatHang(mh);
-                Chuoi = "Them thanh cong"; 
+                Chuoi = "Them thanh cong";
             }
             catch (Exception ex)
             {

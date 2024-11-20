@@ -1,5 +1,5 @@
 ﻿@page
-@model OOP_LTHDT_2024.Pages.MH_DanhSachSanPhamModel
+@model OOP_LTHDT_2024.Pages.Product.MH_DanhSachSanPhamModel
 @{
 }
 
@@ -10,23 +10,25 @@
 		<input class="btn-self" type="submit" value="Tìm kiếm"/>
 	</form>
 </div>
-
+<div>
+	<a href="MH_ThemSanPham">Thêm sản phẩm mới</a>
+</div>
 <div class="table-content">
 	<table>
 		<tr>
-			<td>Mã sản phẩm</td>
-			<td>Tên</td>
-			<td>Giá</td>
-			<td>Năm sản xuất</td>
-			<td>Hạn sử dụng</td>
-			<td>Công ty sản xuất</td>
-			<td>Mặt hàng</td>
-			<td class="action">Hành động</td>
+			<th>Mã sản phẩm</th>
+			<th>Tên</th>
+			<th>Giá</th>
+			<th>Năm sản xuất</th>
+			<th>Hạn sử dụng</th>
+			<th>Công ty sản xuất</th>
+			<th>Mặt hàng</th>
+			<th class="action">Hành động</th>
 		</tr>
 		@foreach (var sanPham in Model.DanhSachSanPham)
 		{
 			<tr>
-				<td>@sanPham.MaSP</td>
+				<td>@sanPham.Ma</td>
 				<td>@sanPham.Ten</td>
 				<td>@sanPham.Gia</td>
 				<td>@sanPham.NamSanXuat</td>
@@ -35,14 +37,14 @@
 				<td>@{
 						string tenMH = "";
 						foreach(var mh in Model.DanhSachMatHang){
-							if (mh.MaMH == sanPham.MatHang) { tenMH = mh.TenMH; break; }
+							if (mh.Ma == sanPham.MatHang) { tenMH = mh.Ten; break; }
 						}
 						@tenMH;
 						}
 				</td>
 				<td class="action">
-					<a href="MH_Sua_SanPham?masp=@sanPham.MaSP">Sửa</a>
-					<a href="MH_Xoa_SanPham?masp=@sanPham.MaSP">Xoá</a>
+					<a href="MH_SuaSanPham?masp=@sanPham.Ma">Sửa</a>
+					<a href="MH_XoaSanPham?masp=@sanPham.Ma">Xoá</a>
 				</td>
 			</tr>
 		}

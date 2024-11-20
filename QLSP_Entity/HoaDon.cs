@@ -14,11 +14,13 @@ namespace QLSP_Entity
 		public bool DaXoa { get; set; }
 		public int SDT { get; set; }
 		public string DiaChi {  get; set; }
+		public bool XacNhan { get; set; }
 		public List<SanPhamHoaDon> ChiTietHD { get; set; }
 		public long ThanhTien { get; set; }
 		public HoaDon(string Ten, DateOnly NgayTaoHD, int SDT, string DiaChi) { 
 			CapNhat(Ten, NgayTaoHD, SDT, DiaChi);
 			DaXoa = false;
+			this.XacNhan = false;
 		}
 		public static void XacThucHoaDon(string Ten, DateOnly NgayTaoHD, int SDT, string DiaChi)
 		{
@@ -35,14 +37,21 @@ namespace QLSP_Entity
 			this.SDT = SDT;
 			this.DiaChi = DiaChi.Trim(); 
 			this.NgayTaoHD = NgayTaoHD;
-		}
+
+        }
 
 		public void CapNhatThanhTien()
 		{
-			foreach(var sp in ChiTietHD)
+			this.ThanhTien = 0;
+			foreach (var sp in ChiTietHD)
 			{
 				this.ThanhTien += sp.ThanhTien;
 			}
+		}
+
+		public void XacNhanHoaDon()
+		{
+			this.XacNhan = true;
 		}
 	}
 }

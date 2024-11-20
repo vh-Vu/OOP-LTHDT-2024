@@ -8,10 +8,12 @@ namespace QLSP_XuLyNghiepVu
 	{
 		private ILuuTru<SanPham> _luuTruSanPham;
 		private IXuLyMatHang _xulyMatHang;
-		public XuLySanPham(ILuuTru<SanPham> LuuSanPham, IXuLyMatHang xulyMatHang)
+		private IXuLyKho _xuLyKho;
+		public XuLySanPham(ILuuTru<SanPham> LuuSanPham, IXuLyMatHang xulyMatHang, IXuLyKho xuLyKho)
 		{
 			_luuTruSanPham = LuuSanPham;
 			_xulyMatHang = xulyMatHang;
+			_xuLyKho = xuLyKho;
 		}
 		public void ThemSanPham(SanPham s)
 		{
@@ -29,7 +31,7 @@ namespace QLSP_XuLyNghiepVu
 
 			foreach(var SanPham in dsSanPham)
 			{
-				if(SanPham.Ten.Contains(Keyword)) ketQua.Add(SanPham);
+				if(SanPham.Ten.Contains(Keyword) && !SanPham.DaXoa) ketQua.Add(SanPham);
 			}
 			return ketQua;
 		}
@@ -58,6 +60,7 @@ namespace QLSP_XuLyNghiepVu
 		}
 		public void XoaSanPham(SanPham s)
 		{
+			_xuLyKho.XoaSanPhamKho(s.Ma);
 			_xulyMatHang.XoaSanPhamRaKhoiMatHang(s.MatHang, s.Ma);
 			_luuTruSanPham.Xoa(s.Ma);
 		}
@@ -66,11 +69,14 @@ namespace QLSP_XuLyNghiepVu
 			var dsSanPham = _luuTruSanPham.DocDanhSach();
 			foreach(var SanPham in dsSanPham)
 			{
-				if (SanPham.Ma == maSP) return SanPham;
+				if (SanPham.Ma == maSP && !SanPham.DaXoa) return SanPham;
 			}
 			return null;
 		}
-
+		public List<SanPham> DocTatCaDanhSachSanPham()
+		{
+			return _luuTruSanPham.DocDanhSach();
+		}
 
 	}
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using QLSP_Entity;
 using QLSP_XuLyNghiepVu;
 
-namespace OOP_LTHDT_2024.Pages
+namespace OOP_LTHDT_2024.Pages.Category
 {
     public class MH_DanhSachMatHangModel : PageModel
     {

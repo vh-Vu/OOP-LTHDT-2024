@@ -1,0 +1,63 @@
+﻿@page
+@model OOP_LTHDT_2024.Pages.PurchaseInvoice.MH_DanhSachHoaDonNhapModel
+@{
+}
+
+<div>
+	<form method="post">
+		<h5>Hổ trợ tìm kiếm theo ngày</h5>
+		<label for="fromDate">Từ ngày:</label>
+		<input type="date" id="fromDate" name="fromDate" /> <br />
+		<label for="toDate">Đến ngày:</label>
+		<input type="date" id="toDate" name="toDate"/>
+		<input class="btn-self" type="submit" value="Tìm kiếm" />
+	</form>
+</div>
+<div>
+	<a href="MH_ThemHoaDonNhap">Thêm hóa đơn mới</a>
+</div>
+<div class="table-content">
+	<table>
+		<tr>
+			<td>Mã hoá đơn</td>
+			<td>Tên khách hàng</td>
+			<td>Số điện thoại</td>
+			<td>Ngày tạo hóa đơn</td>
+			<td>Địa chỉ</td>
+			<td>Thành tiền</td>
+			<td>Trạng thái</td>
+			<td class="action">Hành động</td>
+		</tr>
+		@foreach (var hoaDon in Model.DanhSachHoaDon)
+		{
+			<tr>
+				<td>@hoaDon.Ma</td>
+				<td>@hoaDon.Ten</td>
+				<td>@hoaDon.SDT</td>
+				<td>@hoaDon.NgayTaoHD</td>
+				<td>@hoaDon.DiaChi</td>
+				<td>@hoaDon.ThanhTien</td>
+				<td>@{
+						string TinhTrang = "Chưa nhập kho";
+						if(hoaDon.XacNhan)
+						{
+							TinhTrang = "Hoàn tất";
+						}
+						@TinhTrang
+					}
+				</td>
+				<td class="action">
+					@if (!hoaDon.XacNhan)
+					{
+						<a href="MH_SuaHoaDonNhap?ma=@hoaDon.Ma">Sửa</a>
+						<a href="MH_XoaHoaDonNhap?ma=@hoaDon.Ma">Xoá</a>
+					}
+						<a href="MH_ChiTietHoaDon?ma=@hoaDon.Ma">Xem chi tiết</a>
+
+
+				</td>
+			</tr>
+		}
+	</table>
+
+</div>

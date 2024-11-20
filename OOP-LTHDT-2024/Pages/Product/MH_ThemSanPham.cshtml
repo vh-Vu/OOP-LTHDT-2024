@@ -1,5 +1,5 @@
 ﻿@page
-@model OOP_LTHDT_2024.Pages.MH_ThemSanPhamModel
+@model OOP_LTHDT_2024.Pages.Product.MH_ThemSanPhamModel
 @{
 
 }
@@ -7,18 +7,18 @@
 	<label for="TenSanPham">Tên sản phẩm:</label>
 	<input type="text" name="TenSanPham" value="" /> <br />
 	<label for="Gia">Giá sản phẩm:</label>
-	<input type="number" name="Gia" value="" /> <br />
+	<input type="number" name="Gia" value="" min="1"/> <br />
 	<label for="CongTySanXuat">Công ty sản xuất:</label>
 	<input type="text" name="CongTySanXuat" value="" /> <br />
 	<label for="NamSanXuat">Năm sản xuất:</label>
-	<input type="number" name="NamSanXuat" value="" /> <br />
+	<input type="number" name="NamSanXuat" value="" min="2000"/> <br />
 	<label for="HanSuDung">Hạn sử dụng:</label>
 	<input type="date" name="HanSuDung" value="" /> <br />
 	<label for="MatHang">Mặt hàng:</label>
 	<select name="MatHang">
 		@foreach(var mh in Model.DsMatHang)
 		{
-			<option value="@mh.MaMH">@mh.TenMH</option>
+			<option value="@mh.Ma">@mh.Ten</option>
 		}
 	</select>
 	<br />

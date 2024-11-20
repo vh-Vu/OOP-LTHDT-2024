@@ -1,0 +1,14 @@
+﻿@page
+@model OOP_LTHDT_2024.Pages.SellInvoice.MH_XoaHoaDonXuatModel
+
+@if (Model.HoaDon != null && !Model.HoaDon.XacNhan)
+{
+	<form method="post">
+		<h3>
+			Bạn có thật sự muốn xóa hóa đơn có mã @Model.HoaDon.Ma <br />
+			và có tên Khách hàng @Model.HoaDon.Ten không?
+		</h3>
+		<input type="submit" value="Xoá" />
+	</form>
+}
+@Model.Chuoi

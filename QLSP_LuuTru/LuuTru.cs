@@ -63,7 +63,7 @@ namespace QLSP_LuuTru
 			{
 				if (dsSanPham[i].Ma == ma)
 				{
-					dsSanPham.Remove(dsSanPham[i]);
+					dsSanPham[i].DaXoa = true;
 					break;
 				}
 			}

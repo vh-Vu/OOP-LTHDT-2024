@@ -1,5 +1,5 @@
 ﻿@page
-@model OOP_LTHDT_2024.Pages.MH_Sua_SanPhamModel
+@model OOP_LTHDT_2024.Pages.Product.MH_Sua_SanPhamModel
 @{
 }
 @if(Model.SanPham != null)
@@ -8,11 +8,11 @@
 		<label for="TenSanPham">Tên sản phẩm:</label>
 		<input type="text" name="TenSanPham" value="@Model.SanPham.Ten" /> <br />
 		<label for="Gia">Giá sản phẩm:</label>
-		<input type="number" name="Gia" value="@Model.SanPham.Gia" /> <br />
+		<input type="number" name="Gia" value="@Model.SanPham.Gia" min="1"/> <br />
 		<label for="CongTySanXuat">Công ty sản xuất:</label>
 		<input type="text" name="CongTySanXuat" value="@Model.SanPham.CongTySanXuat" /> <br />
 		<label for="NamSanXuat">Năm sản xuất:</label>
-		<input type="number" name="NamSanXuat" value="@Model.SanPham.NamSanXuat" /> <br />
+		<input type="number" name="NamSanXuat" value="@Model.SanPham.NamSanXuat" min="2000"/> <br />
 		<label for="HanSuDung">Hạn sử dụng:</label>
 		<input type="date" name="HanSuDung" value="@Model.SanPham.HanSuDung.ToString("yyyy-MM-dd")"  /> <br />
 		<label for="MatHang">Mặt hàng:</label>
@@ -20,12 +20,12 @@
 
 			@foreach (var mh in Model.DsMatHang)
 			{
-				if(mh.MaMH== Model.SanPham.MatHang)
+				if(mh.Ma== Model.SanPham.MatHang)
 				{
-					<option value="@mh.MaMH" selected>@mh.TenMH</option>;
+					<option value="@mh.Ma" selected>@mh.Ten</option>;
 					continue;
 				}
-				<option value="@mh.MaMH">@mh.TenMH</option>
+				<option value="@mh.Ma">@mh.Ten</option>
 
 			}
 		</select> <br />

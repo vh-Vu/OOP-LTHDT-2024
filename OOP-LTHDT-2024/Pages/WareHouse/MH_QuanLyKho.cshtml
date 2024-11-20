@@ -1,0 +1,122 @@
+﻿@page
+@model OOP_LTHDT_2024.Pages.WareHouse.MH_QuanLyKhoModel
+@{
+}
+@* @if (Model.DanhSachSanPhamLuuKho != null) *@
+
+
+<h2>Sản phẩm tồn kho theo mặt hàng</h2>
+<table>
+	<tr>
+		<th>Mã mặt hàng</th>
+		<th>Tên mặt hàng</th>
+		<th>Số lượng tồn kho</th>
+	</tr>
+	@{
+		int TongSo = 0;
+		foreach (var matHang in Model.DanhSachMatHang)
+	{
+		<tr>
+			<td>@matHang.Ma</td>
+			<td>@matHang.Ten</td>
+			<td>
+					@{
+						int SoLuong = 0;
+						foreach (var sanPhamLuuKho in Model.DanhSachSanPhamLuuKho)
+						{
+							if (sanPhamLuuKho.MaHang == matHang.Ma)
+							{
+								SoLuong += sanPhamLuuKho.TonKho;
+							}
+
+						}
+						TongSo += SoLuong;
+						@SoLuong
+				}
+			</td>
+		</tr>
+	}
+	}
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">Tổng số sản phẩm</td>
+		<td>@TongSo</td>
+	</tr>
+</table>
+
+<h2>Sản phẩm tồn kho</h2>
+<table>
+	<tr>
+		<th>Mã sản phẩm</th>
+		<th>Tên Sản phẩm</th>
+		<th>Số lượng tồn kho</th>
+	</tr>
+	@foreach (var sanPhamLuuKho in Model.DanhSachSanPhamLuuKho)
+	{
+		<tr>
+			<td>@sanPhamLuuKho.Ma</td>
+			@foreach (var sp in Model.DanhSachSanPham)
+			{
+				if (sp.Ma == sanPhamLuuKho.Ma)
+				{
+					<td>@sp.Ten</td>
+					break;
+
+				}
+			}
+			<td>@sanPhamLuuKho.TonKho</td>
+		</tr>
+	}
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">Tổng số sản phẩm</td>
+		<td>@TongSo</td>
+	</tr>
+</table>
+
+
+
+<h2>Sản phẩm tồn kho đã hết hạn sử dụng</h2>
+<table>
+	<tr>
+		<th>Mã sản phẩm</th>
+		<th>Tên Sản phẩm</th>
+		<th>Số lượng tồn kho đã hết hạng</th>
+	</tr>
+	@{
+		int TongSoHetHan = 0;
+		foreach (var sp in Model.DanhSachSanPham)
+		{
+			if(sp.HanSuDung < Model.CurrentDay)
+			{
+				<tr>
+					<td>@sp.Ma</td>
+					<td>@sp.Ten</td>
+					<td>
+						@foreach(var sanPhamLuuKho in Model.DanhSachSanPhamLuuKho)
+						{
+								if(sanPhamLuuKho.Ma == sp.Ma)
+								{
+								TongSoHetHan += sanPhamLuuKho.TonKho;
+									@sanPhamLuuKho.TonKho;
+								}
+						}
+					</td>
+				</tr>
+			}
+
+		}
+	}
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">Tổng số sản phẩm</td>
+		<td>@TongSoHetHan</td>
+	</tr>
+</table>
+

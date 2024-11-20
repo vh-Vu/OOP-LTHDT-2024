@@ -1,0 +1,89 @@
+﻿@page
+@model OOP_LTHDT_2024.Pages.PurchaseInvoice.MH_ChiTietHoaDonModel
+@{
+}
+@if(Model.HoaDon!=null){
+<h1>Chi Tiết Hóa Đơn</h1>
+    @if (!Model.HoaDon.XacNhan)
+    {
+        <a href="MH_SuaHoaDonNhap?ma=@Model.HoaDon.Ma">Sửa hóa đơn</a>
+        <a href="MH_XoaHoaDonNhap?ma=@Model.HoaDon.Ma">Xóa hóa đơn</a>
+    }
+
+<!-- Hóa Đơn Thông Tin -->
+<table class="invoice-details">
+    <tr>
+        <th>Mã:</th>
+        <td>@Model.HoaDon.Ma</td>
+    </tr>
+    <tr>
+        <th>Tên Đối Tác:</th>
+        <td>@Model.HoaDon.Ten</td>
+    </tr>
+    <tr>
+        <th>Ngày Tạo Hóa Đơn:</th>
+        <td>@Model.HoaDon.NgayTaoHD</td>
+    </tr>
+    <tr>
+        <th>SĐT:</th>
+        <td>@Model.HoaDon.SDT</td>
+    </tr>
+    <tr>
+        <th>Địa Chỉ:</th>
+        <td>@Model.HoaDon.DiaChi</td>
+    </tr>
+    <tr>
+        <th>Trạng Thái Hóa Đơn:</th>
+        <td>
+            @{
+                string TinhTrang = "Chưa nhập kho";
+                if (Model.HoaDon.XacNhan)
+                {
+                TinhTrang = "Hoàn tất";
+                }
+                @TinhTrang
+            } 
+        </td>
+    </tr>
+</table>
+
+<!-- Chi Tiết Sản Phẩm -->
+    <table class="invoice-items">
+    <thead>
+    <tr>
+    <th>Mã Sản Phẩm</th>
+    <th>Tên Sản Phẩm</th>
+    <th>Số Lượng</th>
+    <th>Đơn Giá</th>
+    <th>Thành Tiền</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var ctsp in Model.HoaDon.ChiTietHD){
+    <tr>
+    <td>@ctsp.SanPham.Ma</td>
+    <td>@ctsp.SanPham.Ten</td>
+    <td>@ctsp.SoLuong</td>
+    <td>@ctsp.SanPham.Gia</td>
+    <td>@ctsp.ThanhTien</td>
+    </tr>
+    }
+    </tbody>
+    </table>
+    <table class="invoice-details">
+    <tr class="total-row">
+    <th>Tổng Tiền:</th>
+    <td>@Model.HoaDon.ThanhTien</td>
+    </tr>
+    </table> 
+}
+@Model.Chuoi
+
+@if(Model.HoaDon != null && !Model.HoaDon.XacNhan)
+{
+    <h3>Khi bạn ấn xác nhận thì không thể chỉnh sửa hoặc xóa nữa, hóa đơn sẽ được trữ trong csdl, vì vậy hãy kiểm tra cẩn thận</h3>
+    <form method="post">
+        <input type="hidden" value="@Model.HoaDon.Ma" />
+        <input type="submit" value="Xác nhận"/>
+    </form>
+}

@@ -4,7 +4,7 @@ using QLSP_Entity;
 using QLSP_XuLyNghiepVu;
 using System.Diagnostics.Eventing.Reader;
 
-namespace OOP_LTHDT_2024.Pages
+namespace OOP_LTHDT_2024.Pages.Product
 {
     public class MH_DanhSachSanPhamModel : PageModel
     {

@@ -39,3 +39,30 @@ body {
     color: white;
     text-align: center;
 }
+
+
+
+th {
+    text-align: center;
+}
+th, td {
+    padding-left: 3rem;
+}
+
+.input-div, table, label, input {
+    margin-bottom: 0.5rem;
+}
+
+label {
+    width: 10%; /* Chiều rộng của label */
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+    margin-right: 10px; /* Khoảng cách giữa label và input */
+}
+
+
+tr {
+    border-bottom: 1px solid black;
+}
+

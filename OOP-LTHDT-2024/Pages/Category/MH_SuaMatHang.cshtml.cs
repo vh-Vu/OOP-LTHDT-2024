@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using QLSP_Entity;
 using QLSP_XuLyNghiepVu;
 
-namespace OOP_LTHDT_2024.Pages
+namespace OOP_LTHDT_2024.Pages.Category
 {
     public class MH_SuaMatHangModel : PageModel
     {
@@ -13,36 +13,38 @@ namespace OOP_LTHDT_2024.Pages
         public int MaMH { get; set; }
         [BindProperty]
         public string TenMatHang { get; set; }
-        public string Chuoi =string.Empty;
-        public MH_SuaMatHangModel(): base()
+        public string Chuoi = string.Empty;
+        public MH_SuaMatHangModel() : base()
         {
             _xuLyMatHang = ObjectCreater.TaoDoiTuongXuLyMatHang();
 
-		}
+        }
         public void OnGet()
         {
-            if(MaMH == 0)
+            if (MaMH == 0)
             {
                 Chuoi = "Ma mat hang khong hop le";
                 return;
             }
-			MatHang = _xuLyMatHang.DocMatHang(MaMH);
+            MatHang = _xuLyMatHang.DocMatHang(MaMH);
             if (MatHang == null) Chuoi = "Khong tim thay mat hang nay";
         }
-        public void OnPost() {
+        public void OnPost()
+        {
             try
             {
-				if (MaMH == 0)  throw new Exception("Ma mat hang khong hop le");
-                if (string.IsNullOrEmpty(TenMatHang))       throw new Exception("Ten mat hang khong hop le");
-				MatHang = _xuLyMatHang.DocMatHang(MaMH);
-				if (MatHang == null)       throw new Exception("Khong tim thay mat hang nay");
+                if (MaMH == 0) throw new Exception("Ma mat hang khong hop le");
+                MatHang = _xuLyMatHang.DocMatHang(MaMH);
+                if (MatHang == null) throw new Exception("Khong tim thay mat hang nay");
+                if (TenMatHang != MatHang.Ten)
+                {
+                    MatHang.CapNhat(TenMatHang);
+                    _xuLyMatHang.SuaMatHang(MatHang);
+                }
+                Response.Redirect("/Category/MH_DanhSachMatHang");
 
-                MatHang.TenMH = TenMatHang;
-                _xuLyMatHang.SuaMatHang(MatHang);
-                Response.Redirect("/MH_DanhSachMatHang");
-
-			}
-			catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Chuoi = ex.Message;
             }
