@@ -13,6 +13,9 @@ namespace QLSP_XuLyNghiepVu
 		private ILuuTru<HoaDon> _luuTruHoaDonMua;
 		private IXuLySanPhamHoaDon _xuLySanPhamHoaDon;
 		private IXuLyKho _xuLyKho;
+		private DateOnly DefaultFromDate = new DateOnly(2000, 1, 1);
+		private DateOnly DefaultToDate = new DateOnly(2049, 12, 31);
+
 		public XuLyHoaDon(ILuuTru<HoaDon> luuTruHoaDonMua, IXuLySanPhamHoaDon xuLySanPhamHoaDon, IXuLyKho xuLyKho)
 		{
 			this._luuTruHoaDonMua = luuTruHoaDonMua;
@@ -20,9 +23,9 @@ namespace QLSP_XuLyNghiepVu
 			this._xuLyKho = xuLyKho;
         }
 		
-		public void ThemHoaDon(HoaDon hd, List<int?> SoLuong)
+		public void ThemHoaDon(HoaDon hd, List<SPHoaDon> CTHD)
 		{
-			var ChiTietHD = _xuLySanPhamHoaDon.LocSanPham(SoLuong);
+			var ChiTietHD = _xuLySanPhamHoaDon.LocSP(CTHD);
             hd.ChiTietHD = ChiTietHD;
 			hd.Ma = _luuTruHoaDonMua.CapPhatID();
 			hd.CapNhatThanhTien();
@@ -31,14 +34,12 @@ namespace QLSP_XuLyNghiepVu
 
 		public void XacNhanHoaDon(HoaDon hd, bool Nhap = true)
 		{
-			_xuLySanPhamHoaDon.KiemTraTinhHopLe(hd.ChiTietHD);
 			var dsHD = _luuTruHoaDonMua.DocDanhSach();
 			int p = -1;
 			for (int i = 0; i < dsHD.Count; i++)
 			{
-				if (dsHD[i].Ma == hd.Ma) p = i;
+				if (dsHD[i].Ma == hd.Ma) { p = i; }
 			}
-
 			if (p == -1) throw new Exception("Hóa đơn không tồn tại trong danh sách");
 			if (Nhap) _xuLyKho.NhapKho(dsHD[p].ChiTietHD);
 			else _xuLyKho.XuatKho(dsHD[p].ChiTietHD);
@@ -52,12 +53,12 @@ namespace QLSP_XuLyNghiepVu
 			_luuTruHoaDonMua.Xoa(hd.Ma);
 		}
 
-        public void SuaHoaDon(HoaDon hd, List<int?> SoLuong)
+        public void SuaHoaDon(HoaDon hd, List<SPHoaDon> CTHD)
         {
 			try
 			{
 
-				var ChiTietHD = _xuLySanPhamHoaDon.LocSanPham(SoLuong);
+				var ChiTietHD = _xuLySanPhamHoaDon.LocSP(CTHD);
 
                 var dsHD = _luuTruHoaDonMua.DocDanhSach();
 				int p = -1;
@@ -81,8 +82,8 @@ namespace QLSP_XuLyNghiepVu
         }
 		public List<HoaDon> DocDanhSach(DateOnly fromDate = default, DateOnly toDate = default)
 		{
-			if (fromDate == default)	fromDate = new DateOnly(2000, 1, 1);
-			if (toDate == default)	toDate = DateOnly.FromDateTime(DateTime.Now);
+			if (fromDate == default)	fromDate = DefaultFromDate;
+			if (toDate == default)		toDate = DefaultToDate;
 			var dsHD = _luuTruHoaDonMua.DocDanhSach();
 			var ketQua = new List<HoaDon>();
 

@@ -1,6 +1,7 @@
 ﻿@page
 @model OOP_LTHDT_2024.Pages.SellInvoice.MH_ChiTietHoaDonModel
 @{
+    ViewData["Title"] = $"Chi tiết hoá đơn {Model.ma}";
 }
 @if(Model.HoaDon!=null){
 <h1>Chi Tiết Hóa Đơn</h1>
@@ -61,10 +62,10 @@
     <tbody>
     @foreach (var ctsp in Model.HoaDon.ChiTietHD){
     <tr>
-    <td>@ctsp.SanPham.Ma</td>
-    <td>@ctsp.SanPham.Ten</td>
+    <td>@ctsp.Ma</td>
+    <td>@ctsp.Ten</td>
     <td>@ctsp.SoLuong</td>
-    <td>@ctsp.SanPham.Gia</td>
+    <td>@ctsp.Gia</td>
     <td>@ctsp.ThanhTien</td>
     </tr>
     }
@@ -77,11 +78,11 @@
     </tr>
     </table> 
 }
-@Model.Chuoi
+<h5>@Model.Chuoi</h5>
 
 @if(Model.HoaDon != null && !Model.HoaDon.XacNhan)
 {
-    <h3>Khi bạn ấn xác nhận thì không thể chỉnh sửa hoặc xóa nữa, hóa đơn sẽ được trữ trong csdl, vì vậy hãy kiểm tra cẩn thận</h3>
+    <h6>Khi bạn ấn xác nhận thì không thể chỉnh sửa hoặc xóa nữa, hóa đơn sẽ được trữ trong csdl, vì vậy hãy kiểm tra cẩn thận</h6>
     <form method="post">
         <input type="hidden" value="@Model.HoaDon.Ma" />
         <input type="submit" value="Xác nhận"/>

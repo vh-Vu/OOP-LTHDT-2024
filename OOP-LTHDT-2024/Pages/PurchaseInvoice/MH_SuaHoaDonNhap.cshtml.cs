@@ -11,7 +11,7 @@ namespace OOP_LTHDT_2024.Pages.PurchaseInvoice
         private IXuLySanPham _xuLySanPham;
         [BindProperty(SupportsGet =true)]public int ma {  get; set; }
         public HoaDon HoaDon { get; set; }
-		[BindProperty] public List<int?> SoLuong { get; set; }
+		[BindProperty] public List<SPHoaDon> SPHoaDon { get; set; }
 		[BindProperty] public string TenKhachHang { get; set; }
 		[BindProperty] public DateOnly NgayTaoHD { get; set; }
 		[BindProperty] public int SDT { get; set; }
@@ -30,7 +30,7 @@ namespace OOP_LTHDT_2024.Pages.PurchaseInvoice
             {
                 if (ma == 0) throw new Exception("Mã hóa đơn không hợp lệ");
                 HoaDon = _xuLyHoaDon.DocHoaDon(ma) ?? throw new Exception("Không tìm thấy hóa đơn này");
-                if (HoaDon.XacNhan) throw new Exception("Sản phẩm không thể bị sửa");
+                if (HoaDon.XacNhan) throw new Exception("Hóa đơn không thể sửa");
                 DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham();
 
             }
@@ -47,9 +47,9 @@ namespace OOP_LTHDT_2024.Pages.PurchaseInvoice
                 HoaDon = _xuLyHoaDon.DocHoaDon(ma) ?? throw new Exception("Không tìm thấy hóa đơn này");
                 if (HoaDon.XacNhan) throw new Exception("Sản phẩm không thể bị sửa");
                 DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham();
-				if (SoLuong.Count == 0 || SoLuong.Count != DanhSachSanPham.Count) throw new Exception("Số lượng sản phẩm trong hóa đơn không hợp lệ");
+				if (SPHoaDon.Count != DanhSachSanPham.Count) throw new Exception("Số lượng sản phẩm trong hóa đơn không hợp lệ");
 				HoaDon.CapNhat(TenKhachHang, NgayTaoHD, SDT, DiaChi);
-				_xuLyHoaDon.SuaHoaDon(HoaDon, SoLuong);
+				_xuLyHoaDon.SuaHoaDon(HoaDon, SPHoaDon);
                 Response.Redirect("MH_DanhSachHoaDonNhap");
 			}
 			catch (Exception ex)

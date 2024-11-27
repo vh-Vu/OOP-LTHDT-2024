@@ -1,6 +1,9 @@
 ﻿@page
 @model OOP_LTHDT_2024.Pages.PurchaseInvoice.MH_XoaHoaDonNhapModel
+@{
+	ViewData["Title"] = $"Xoá hoá đơn {Model.ma}";
 
+}
 @if (Model.HoaDon != null && !Model.HoaDon.XacNhan)
 {
 	<form method="post">

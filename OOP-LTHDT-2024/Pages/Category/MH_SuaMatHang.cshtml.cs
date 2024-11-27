@@ -34,13 +34,7 @@ namespace OOP_LTHDT_2024.Pages.Category
             try
             {
                 if (MaMH == 0) throw new Exception("Ma mat hang khong hop le");
-                MatHang = _xuLyMatHang.DocMatHang(MaMH);
-                if (MatHang == null) throw new Exception("Khong tim thay mat hang nay");
-                if (TenMatHang != MatHang.Ten)
-                {
-                    MatHang.CapNhat(TenMatHang);
-                    _xuLyMatHang.SuaMatHang(MatHang);
-                }
+                _xuLyMatHang.SuaMatHang(MaMH, TenMatHang);
                 Response.Redirect("/Category/MH_DanhSachMatHang");
 
             }

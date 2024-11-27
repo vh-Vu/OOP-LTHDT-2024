@@ -1,8 +1,10 @@
 ﻿@page
 @model OOP_LTHDT_2024.Pages.WareHouse.MH_QuanLyKhoModel
 @{
+	ViewData["Title"] = "Kho";
+
 }
-@* @if (Model.DanhSachSanPhamLuuKho != null) *@
+
 
 
 <h2>Sản phẩm tồn kho theo mặt hàng</h2>
@@ -22,11 +24,11 @@
 			<td>
 					@{
 						int SoLuong = 0;
-						foreach (var sanPhamLuuKho in Model.DanhSachSanPhamLuuKho)
+						foreach (var sanPhamLuuKho in Model.ThongKeSanPhamLuuKho)
 						{
-							if (sanPhamLuuKho.MaHang == matHang.Ma)
+							if (matHang.DanhSachSanPham.Contains(sanPhamLuuKho[0]))
 							{
-								SoLuong += sanPhamLuuKho.TonKho;
+								SoLuong += sanPhamLuuKho[1];
 							}
 
 						}
@@ -39,6 +41,8 @@
 	}
 	<tr>
 		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td colspan="2">Tổng số sản phẩm</td>
@@ -46,30 +50,32 @@
 	</tr>
 </table>
 
-<h2>Sản phẩm tồn kho</h2>
+<h2>Sản phẩm tồn kho theo sản phẩm</h2>
 <table>
 	<tr>
 		<th>Mã sản phẩm</th>
 		<th>Tên Sản phẩm</th>
 		<th>Số lượng tồn kho</th>
 	</tr>
-	@foreach (var sanPhamLuuKho in Model.DanhSachSanPhamLuuKho)
+	@foreach (var sanPhamLuuKho in Model.ThongKeSanPhamLuuKho)
 	{
 		<tr>
-			<td>@sanPhamLuuKho.Ma</td>
+			<td>@sanPhamLuuKho[0]</td>
 			@foreach (var sp in Model.DanhSachSanPham)
 			{
-				if (sp.Ma == sanPhamLuuKho.Ma)
+				if (sp.Ma == sanPhamLuuKho[0])
 				{
 					<td>@sp.Ten</td>
 					break;
 
 				}
 			}
-			<td>@sanPhamLuuKho.TonKho</td>
+			<td>@sanPhamLuuKho[1]</td>
 		</tr>
 	}
 	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
@@ -80,43 +86,80 @@
 
 
 
-<h2>Sản phẩm tồn kho đã hết hạn sử dụng</h2>
+<h2>Tồn kho đã hết hạn sử dụng</h2>
 <table>
 	<tr>
 		<th>Mã sản phẩm</th>
 		<th>Tên Sản phẩm</th>
-		<th>Số lượng tồn kho đã hết hạng</th>
+		<th>Số lượng tồn kho</th>
 	</tr>
-	@{
-		int TongSoHetHan = 0;
-		foreach (var sp in Model.DanhSachSanPham)
+		@foreach (var spk in Model.ThongKeSanPhamLuuKhoHetHanSuDung)
 		{
-			if(sp.HanSuDung < Model.CurrentDay)
-			{
-				<tr>
-					<td>@sp.Ma</td>
-					<td>@sp.Ten</td>
-					<td>
-						@foreach(var sanPhamLuuKho in Model.DanhSachSanPhamLuuKho)
+			<tr>
+				<td>@spk[0]</td>
+					@foreach (var sp in Model.DanhSachSanPham)
+					{
+						if (sp.Ma == spk[0])
 						{
-								if(sanPhamLuuKho.Ma == sp.Ma)
-								{
-								TongSoHetHan += sanPhamLuuKho.TonKho;
-									@sanPhamLuuKho.TonKho;
-								}
+						<td>@sp.Ten</td>
+							break;
+
 						}
-					</td>
-				</tr>
-			}
+					}
+				<td>@spk[1]</td>
+			</tr>
 
 		}
-	}
+	
 	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td colspan="2">Tổng số sản phẩm</td>
-		<td>@TongSoHetHan</td>
+		<td>@Model.TongSoSanPhamHetHan</td>
 	</tr>
 </table>
 
+
+
+<h2>Danh mục sản phẩm trong kho hiện tại</h2>
+<table>
+	<tr>
+		<th>Mã sản phẩm</th>
+		<th>Tên Sản phẩm</th>
+		<th>Hạn sử dụng</th>
+		<th>Tồn kho</th>
+	</tr>
+	@foreach (var spk in Model.DanhSachSanPhamLuuKho)
+	{
+		<tr>
+			<td>@spk.Ma</td>
+			@foreach (var sp in Model.DanhSachSanPham)
+			{
+				if (sp.Ma == spk.Ma)
+				{
+					<td>@sp.Ten</td>
+					break;
+
+				}
+			}
+			<td style="color: @(spk.HanSuDung < Model.Current ? "red" : "black")">
+				@spk.HanSuDung
+			</td>
+			<td>@spk.TonKho</td>
+		</tr>
+
+	}
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="3">Tổng số sản phẩm</td>
+		<td>@TongSo</td>
+	</tr>
+</table>

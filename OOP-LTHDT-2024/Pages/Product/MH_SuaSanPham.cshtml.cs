@@ -47,14 +47,7 @@ namespace OOP_LTHDT_2024.Pages.Product
             try
             {
                 if (MaSp == 0) throw new Exception("Ma san pham khong hop le");
-                   
-                SanPham = _xuLySanPham.DocSanPham(MaSp);
-
-                if (SanPham == null) throw new Exception("Khong tim thay san pham");
-                DsMatHang = _xuLyMatHang.DocDanhSachMatHang();
-
-                SanPham.CapNhatSanPham(TenSanPham, Gia, HanSuDung, NamSanXuat, CongTySanXuat, MatHang);
-				_xuLySanPham.SuaSanPham(SanPham);
+                _xuLySanPham.SuaSanPham(MaSp, TenSanPham, Gia, HanSuDung, NamSanXuat, CongTySanXuat, MatHang);   
                 Response.Redirect("/Product/MH_DanhSachSanPham");
                 
             }

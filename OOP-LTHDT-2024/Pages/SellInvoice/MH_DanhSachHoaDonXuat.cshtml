@@ -1,6 +1,8 @@
 ﻿@page
 @model OOP_LTHDT_2024.Pages.SellInvoice.MH_DanhSachHoaDonXuatModel
 @{
+	ViewData["Title"] = "Quản lí hoá đơn xuất";
+
 }
 
 <div>
@@ -19,14 +21,14 @@
 <div class="table-content">
 	<table>
 		<tr>
-			<td>Mã hoá đơn</td>
-			<td>Tên khách hàng</td>
-			<td>Số điện thoại</td>
-			<td>Ngày tạo hóa đơn</td>
-			<td>Địa chỉ</td>
-			<td>Thành tiền</td>
-			<td>Trạng thái</td>
-			<td class="action">Hành động</td>
+			<th>Mã hoá đơn</th>
+			<th>Tên khách hàng</th>
+			<th>Số điện thoại</th>
+			<th>Ngày tạo hóa đơn</th>
+			<th>Địa chỉ</th>
+			<th>Thành tiền</th>
+			<th>Trạng thái</th>
+			<th class="action">Hành động</th>
 		</tr>
 		@foreach (var hoaDon in Model.DanhSachHoaDon)
 		{

@@ -9,17 +9,21 @@ namespace QLSP_XuLyNghiepVu
 		private ILuuTru<SanPham> _luuTruSanPham;
 		private IXuLyMatHang _xulyMatHang;
 		private IXuLyKho _xuLyKho;
-		public XuLySanPham(ILuuTru<SanPham> LuuSanPham, IXuLyMatHang xulyMatHang, IXuLyKho xuLyKho)
+        private IXuLyThongKeKho _xuLyThongKeKho;
+
+        public XuLySanPham(ILuuTru<SanPham> LuuSanPham, IXuLyMatHang xulyMatHang, IXuLyKho xuLyKho, IXuLyThongKeKho xuLyThongKeKho)
 		{
 			_luuTruSanPham = LuuSanPham;
 			_xulyMatHang = xulyMatHang;
 			_xuLyKho = xuLyKho;
-		}
+			_xuLyThongKeKho = xuLyThongKeKho;
+
+        }
 		public void ThemSanPham(SanPham s)
 		{
 			SanPham sp =  _luuTruSanPham.TimTheoTen(s.Ten);
 
-			if (sp!=null)	throw new Exception("ID da ton tai");
+			if (sp!=null && !sp.DaXoa)	throw new Exception("ID da ton tai");
 			s.Ma = _luuTruSanPham.CapPhatID();
 			_xulyMatHang.ThemSanPhamVaoMatHang(s.MatHang,s.Ma);
 			_luuTruSanPham.Them(s);
@@ -36,31 +40,32 @@ namespace QLSP_XuLyNghiepVu
 			return ketQua;
 		}
 		
-		public void SuaSanPham(SanPham s)
+		public void SuaSanPham(int Ma, string Ten, int Gia, DateOnly HanSuDung, int NamSanXuat, string CongTySanXuat, int MatHang)
 		{
 			var dsSanPham = _luuTruSanPham.DocDanhSach();
 			int p = -1;
 
 			for(int i = 0; i < dsSanPham.Count; i++)
 			{
-				if (dsSanPham[i].Ma == s.Ma)
+				if (dsSanPham[i].Ma == Ma)
 				{
 					p = i;
 					continue;
 				}
-				if (dsSanPham[i].Ten == s.Ten) throw new Exception("Ten san pham da ton tai");
+				if (dsSanPham[i].Ten == Ten && !dsSanPham[i].DaXoa) throw new Exception("Ten san pham da ton tai");
 			}
 
 			if(p==-1) throw new Exception("San pham khong ton tai");
-
-			if (dsSanPham[p].MatHang!= s.MatHang) _xulyMatHang.SanPhamThayDoiMatHang(dsSanPham[p].MatHang, s.MatHang, s.Ma);
-			
-			dsSanPham[p] = s;
+			int maMHCu = dsSanPham[p].MatHang;
+			dsSanPham[p].CapNhat(Ten,Gia, HanSuDung, NamSanXuat, CongTySanXuat, MatHang);
+			if (maMHCu != MatHang) _xulyMatHang.SanPhamThayDoiMatHang(maMHCu, MatHang, Ma);
 			_luuTruSanPham.LuuDanhSach(dsSanPham);
 		}
+
 		public void XoaSanPham(SanPham s)
 		{
-			_xuLyKho.XoaSanPhamKho(s.Ma);
+            _xuLyThongKeKho.XoaSanPhamKho(s.Ma);
+            _xuLyKho.XoaSanPhamKho(s.Ma);
 			_xulyMatHang.XoaSanPhamRaKhoiMatHang(s.MatHang, s.Ma);
 			_luuTruSanPham.Xoa(s.Ma);
 		}
@@ -73,9 +78,9 @@ namespace QLSP_XuLyNghiepVu
 			}
 			return null;
 		}
-		public List<SanPham> DocTatCaDanhSachSanPham()
+		public DateTime DocThoiGianCapNhat()
 		{
-			return _luuTruSanPham.DocDanhSach();
+			return _luuTruSanPham.DocThoiGianCapNhat();
 		}
 
 	}

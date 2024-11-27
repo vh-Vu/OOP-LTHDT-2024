@@ -13,9 +13,11 @@ namespace QLSP_LuuTru
 	{
 		private string _filePath;
 		private string _IDFile;
-		public LuuTru(string filePath, string IDFile) {
+		private string _lastTimeUpdate;
+		public LuuTru(string filePath, string IDFile,string LastTimeEditFile) {
 			this._filePath = filePath;
 			this._IDFile = IDFile;
+			this._lastTimeUpdate = LastTimeEditFile;
 		}
 
 		public int CapPhatID()
@@ -26,9 +28,9 @@ namespace QLSP_LuuTru
 		}
 		public void Them(T t)
 		{
-			List<T> dsSanPham = DocDanhSach();
-			dsSanPham.Add(t);
-			LuuDanhSach(dsSanPham);
+			List<T> ds = DocDanhSach();
+			ds.Add(t);
+			LuuDanhSach(ds);
 		}
 		public List<T> DocDanhSach()
 		{
@@ -44,11 +46,12 @@ namespace QLSP_LuuTru
 			StreamWriter file = new StreamWriter(_filePath);
 			file.Write(dsMoi);
 			file.Close();
+			SuaThoiGianCapNhat();
 		}
 		public T TimTheoTen(string ten)
 		{
-			List<T> dsMatHang = DocDanhSach();
-			foreach (T item in dsMatHang)
+			List<T> ds = DocDanhSach();
+			foreach (T item in ds)
 			{
 				if (item.Ten == ten) return item;
 			}
@@ -58,16 +61,28 @@ namespace QLSP_LuuTru
 
 		public void Xoa(int ma)
 		{
-			List<T> dsSanPham = DocDanhSach();
-			for (int i = 0; i < dsSanPham.Count; i++)
+			List<T> ds = DocDanhSach();
+			for (int i = 0; i < ds.Count; i++)
 			{
-				if (dsSanPham[i].Ma == ma)
+				if (ds[i].Ma == ma)
 				{
-					dsSanPham[i].DaXoa = true;
+					ds[i].Xoa();
 					break;
 				}
 			}
-			LuuDanhSach(dsSanPham);
+			LuuDanhSach(ds);
+		}
+
+		private void SuaThoiGianCapNhat()
+		{
+			string currentTime = DateTime.Now.ToString();
+			File.WriteAllText(_lastTimeUpdate, currentTime);
+		}
+		public DateTime DocThoiGianCapNhat()
+		{
+			var lastTime = DateTime.Parse(File.ReadAllText(_lastTimeUpdate));
+			return lastTime;
+
 		}
 	}
 }

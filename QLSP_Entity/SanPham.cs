@@ -1,43 +1,79 @@
-﻿namespace QLSP_Entity
+﻿using System.Text.Json;
+
+namespace QLSP_Entity
 {
 	public class SanPham : IEntity
 	{
-		public int Ma { get; set; }
-		public string Ten { get; set; }
-		public bool DaXoa { get; set; }
-		public int Gia { get; set; }
-		public DateOnly HanSuDung { get; set; }
-		public int NamSanXuat { get; set; }
-		public string CongTySanXuat { get; set; }
-		public int MatHang { get; set; }
-		public SanPham(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
-		{
-			CapNhatSanPham(ten, gia, HanSuDung, namSanXuat, congTySanXuat, matHang);
-			DaXoa = false;
+		private int _ma;
+		private string _ten;
+		private bool _daXoa;
+		private int _gia;
+		private DateOnly _hanSuDung;
+		private int _namSanXuat;
+		private string _congTySanXuat;
+		private int _matHang;
+		public int Ma { get { return _ma; } set { if (value == 0) throw new Exception("Du lieu khong hop le"); _ma= value ; } }
+		public string Ten {
+			get
+			{
+				return _ten;
+			} 
+			set
+			{
+				if (string.IsNullOrEmpty(value)) throw new Exception("Ten san pham khong hop le");
+				_ten = value.Trim();
+			}
+		}
+		public bool DaXoa { get { return _daXoa; } set {_daXoa = value; } }
+
+		public int Gia { get { return _gia; }
+			set {
+				if (value < 0) throw new Exception("Gia san pham khong hop le");
+				_gia = value;
+			} 
 		}
 
-		public void CapNhatSanPham(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
+		public DateOnly HanSuDung { get {return _hanSuDung; }
+			set {
+				_hanSuDung = value;
+			}
+		}
+		public int NamSanXuat { get { return _namSanXuat; }
+			set {
+				int currentYear = DateTime.Now.Year;
+				if (value > currentYear || value < 2000) throw new Exception("Nam san xuat khong hop le");
+				_namSanXuat = value;
+			} 
+		}
+		public string CongTySanXuat { get { return _congTySanXuat; }
+			set {
+				if (string.IsNullOrEmpty(value)) throw new Exception("Ten cong ty khong hop le");
+				_congTySanXuat = value.Trim();
+			} 
+		}
+		public int MatHang { get { return _matHang; }
+			set {
+				_matHang = value;
+			} }
+		public SanPham(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
 		{
-			KiemTraDieuKien(ten, gia, HanSuDung, namSanXuat, congTySanXuat, matHang);
+			CapNhat(ten, gia, HanSuDung, namSanXuat, congTySanXuat, matHang);
+			this._daXoa = false;
+		}
 
-			this.Ten = ten.Trim();
+		public void Xoa()
+		{
+			_daXoa = true;
+		}
+
+		public void CapNhat(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
+		{
+			this.Ten = ten;
 			this.Gia = gia;
 			this.HanSuDung = HanSuDung;
 			this.NamSanXuat = namSanXuat;
-			this.CongTySanXuat = congTySanXuat.Trim();
-			this.MatHang = matHang;
-		}
-
-
-		public static void KiemTraDieuKien(string ten, int gia, DateOnly HanSuDung, int namSanXuat, string congTySanXuat, int matHang)
-		{
-			if (string.IsNullOrEmpty(ten)) throw new Exception("Ten san pham khong hop le");
-			if (gia <= 0) throw new Exception("Gia san pham khong hop le");
-			if (string.IsNullOrEmpty(congTySanXuat)) throw new Exception("Ten cong ty khong hop le");
-			if (HanSuDung < DateOnly.FromDateTime(DateTime.Now.Date)) throw new Exception("Han su dung khong hop le");
-			int currentYear = DateTime.Now.Year;
-			if (namSanXuat > currentYear || namSanXuat < 2000) throw new Exception("Nam san xuat khong hop le");
-			if (matHang <= 0) throw new Exception("Mat hang khong hop le");
+			this.CongTySanXuat = congTySanXuat;
+			this._matHang = matHang;
 		}
 	}
 }

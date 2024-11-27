@@ -9,8 +9,6 @@ namespace QLSP_XuLyNghiepVu
 {
 	public interface IXuLySanPhamHoaDon
 	{
-		List<SanPhamHoaDon> LocSanPham(List<int?> SoLuong);
-		void KiemTraTinhHopLe(List<SanPhamHoaDon> danhSachHoaDon);
-
+		List<SPHoaDon> LocSP(List<SPHoaDon> SPHD);
     }
 }

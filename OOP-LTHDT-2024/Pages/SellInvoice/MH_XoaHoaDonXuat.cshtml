@@ -1,5 +1,8 @@
 ﻿@page
 @model OOP_LTHDT_2024.Pages.SellInvoice.MH_XoaHoaDonXuatModel
+@{
+	ViewData["Title"] = $"Xoá hoá đơn {Model.ma}";
+}
 
 @if (Model.HoaDon != null && !Model.HoaDon.XacNhan)
 {

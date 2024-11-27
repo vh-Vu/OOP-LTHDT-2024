@@ -9,9 +9,10 @@ namespace QLSP_XuLyNghiepVu
 {
 	 public interface IXuLyKho
 	{
-		void NhapKho(List<SanPhamHoaDon> dsNhapKho);
-		void XuatKho(List<SanPhamHoaDon> dsXuatKho, bool xuat = true);
-		void XoaSanPhamKho(int ma);
-		List<SanPhamLuuKho> DocDanhSachKho();
-	}
+		void NhapKho(List<SPHoaDon> dsNhapKho);
+		void XuatKho(List<SPHoaDon> dsXuatKho);
+		void XoaSanPhamKho(int Ma);      
+		public List<SanPhamLuuKho> DocDanhSachKho();
+		int SanPhamHetHan(int Ma);
+    }
 }

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using QLSP_Entity;
 using QLSP_XuLyNghiepVu;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OOP_LTHDT_2024.Pages.PurchaseInvoice
 {

@@ -10,13 +10,14 @@ namespace QLSP_Entity
 	{
 		public int Ma {  get; set; }
 		public DateOnly NgayTaoHD { get; set; }
+		public DateTime NgayCapNhatHoaDon { get; set; }
 		public string Ten { get; set; }
 		public bool DaXoa { get; set; }
 		public int SDT { get; set; }
 		public string DiaChi {  get; set; }
 		public bool XacNhan { get; set; }
-		public List<SanPhamHoaDon> ChiTietHD { get; set; }
-		public long ThanhTien { get; set; }
+		public List<SPHoaDon> ChiTietHD { get; set; }
+		public double ThanhTien { get; set; }
 		public HoaDon(string Ten, DateOnly NgayTaoHD, int SDT, string DiaChi) { 
 			CapNhat(Ten, NgayTaoHD, SDT, DiaChi);
 			DaXoa = false;
@@ -37,7 +38,7 @@ namespace QLSP_Entity
 			this.SDT = SDT;
 			this.DiaChi = DiaChi.Trim(); 
 			this.NgayTaoHD = NgayTaoHD;
-
+			NgayCapNhatHoaDon = DateTime.Now;
         }
 
 		public void CapNhatThanhTien()
@@ -52,6 +53,10 @@ namespace QLSP_Entity
 		public void XacNhanHoaDon()
 		{
 			this.XacNhan = true;
+		}
+		public void Xoa()
+		{
+			DaXoa = true;
 		}
 	}
 }

@@ -12,9 +12,9 @@ namespace QLSP_XuLyNghiepVu
 		void ThemSanPham(SanPham s);
 		public List<SanPham> DocDanhSachSanPham(string Keyword="");
 		public SanPham DocSanPham(int maSP);
-		public void SuaSanPham(SanPham s);
+		public void SuaSanPham(int Ma, string Ten, int Gia, DateOnly HanSuDung, int NamSanXuat, string CongTySanXuat, int MatHang);
 		public void XoaSanPham(SanPham s);
-		public List<SanPham> DocTatCaDanhSachSanPham();
+		DateTime DocThoiGianCapNhat();
 
 	}
 }

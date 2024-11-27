@@ -47,7 +47,6 @@ namespace OOP_LTHDT_2024.Pages.Product
                 if (DsMatHang.Count == 0) throw new Exception("Khong co mat hang kha dung, vui long tao mat hang truoc");
 				SanPham sanPham = new SanPham(TenSanPham, Gia, HanSuDung, NamSanXuat, CongTySanXuat, MatHang);
 				_xuLySanPham.ThemSanPham(sanPham);
-                //_xuLyMatHang.ThemSanPhamVaoMatHang(sanPham);
 				Chuoi = "Them thanh cong";
 			}
             catch (Exception ex)

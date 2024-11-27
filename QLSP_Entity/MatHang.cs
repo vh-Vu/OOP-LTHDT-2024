@@ -25,19 +25,36 @@ namespace QLSP_Entity
 		public void CapNhat(string Ten)
 		{
 			KiemTraDieuKien(Ten);
+			if(Ten.Trim()!=this.Ten)
 			this.Ten = Ten.Trim();
 		}
 		public void XoaSanPham(int s)
 		{
-			if (!this.DanhSachSanPham.Contains(s))
-				throw new Exception("San pham khong co trong danh sach");
+			if (!TonTaiSanPham(s)) throw new Exception("Sản phẩm không có trong danh sách mặt hàng");
 			this.DanhSachSanPham.Remove(s);
 		}
 		public void ThemSanPham(int s)
 		{
-			if (this.DanhSachSanPham.Contains(s))
-				throw new Exception("San pham da ton tai");
+			if (TonTaiSanPham(s))	throw new Exception("Sản phẩm đã tồn tại trong danh sách mặt hàng");
 			this.DanhSachSanPham.Add(s);
+		}
+
+		private bool TonTaiSanPham(int MaSp)
+		{
+			return this.DanhSachSanPham.Contains(MaSp);
+		}
+
+		public void ThayDoiViTriSanPhamTrongMatHang(MatHang Moi,int MaSp)
+		{
+			if (!TonTaiSanPham(MaSp))		throw new Exception("Sản phẩm không có trong danh sách mặt hàng cũ");
+			if (Moi.TonTaiSanPham(MaSp))	throw new Exception("Sản phẩm đã tồn tại trong danh sách mặt hàng mới");
+			DanhSachSanPham.Remove(MaSp);
+			Moi.DanhSachSanPham.Add(MaSp);
+
+		}
+		public void Xoa()
+		{
+			this.DaXoa = true;
 		}
 	}
 }

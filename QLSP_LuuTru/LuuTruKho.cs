@@ -12,7 +12,7 @@ namespace QLSP_LuuTru
 	public class LuuTruKho: ILuuTruKho
     {
 		string _filePath = @"Data\Kho.json";
-		public void LuuDanhSach(List<SanPhamLuuKho> dsspKho)
+        public void LuuDanhSach(List<SanPhamLuuKho> dsspKho)
 		{
 			StreamWriter file = new StreamWriter(_filePath);
 			var ds = JsonConvert.SerializeObject(dsspKho);
@@ -30,5 +30,5 @@ namespace QLSP_LuuTru
 		}
 
 
-	}
+    }
 }

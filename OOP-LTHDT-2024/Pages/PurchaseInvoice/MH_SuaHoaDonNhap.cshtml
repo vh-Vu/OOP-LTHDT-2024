@@ -1,11 +1,13 @@
 ﻿@page
 @model OOP_LTHDT_2024.Pages.PurchaseInvoice.MH_SuaHoaDonNhapModel
 @{
+	ViewData["Title"] = $"Sửa hoá đơn {Model.ma}";
+
 }
 @if(Model.HoaDon !=null && !Model.HoaDon.XacNhan)
 {
 	<form method="post">
-		<label for="TenKhachHang">Tên khách hàng:</label>
+		<label for="TenKhachHang">Tên đối tác:</label>
 		<input type="text" id="TenKhachHang" name="TenKhachHang" value="@Model.HoaDon.Ten" /> <br />
 
 
@@ -30,10 +32,10 @@
 			@for (int i = 0; i < Model.DanhSachSanPham.Count; i++)
 			{
 				<tr>
-					<td>@Model.DanhSachSanPham[i].Ma</td>
+					<td><input type="hidden" value="@Model.DanhSachSanPham[i].Ma" name="SPHoaDon[@i].Ma" /> @Model.DanhSachSanPham[i].Ma</td>
 					<td>@Model.DanhSachSanPham[i].Ten</td>
 					<td>@Model.DanhSachSanPham[i].Gia</td>
-					<td><input asp-for="SoLuong[i]" type="number" value="0" min="0" /></td>
+					<td><input type="number" value="0" min="0" name="SPHoaDon[@i].SoLuong"/></td>
 				</tr>
 			}
 		</table>

@@ -15,6 +15,6 @@ namespace QLSP_LuuTru
 		T? TimTheoTen(string ten);
 		void Them(T t);
 		void Xoa(int ma);
-
+		DateTime DocThoiGianCapNhat();
 	}
 }

@@ -1,4 +1,5 @@
-﻿using QLSP_Entity;
+﻿using Newtonsoft.Json.Bson;
+using QLSP_Entity;
 using QLSP_LuuTru;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace QLSP_XuLyNghiepVu
 	public class XuLyMatHang : IXuLyMatHang
 	{
 		private ILuuTru<MatHang> _luuTruMatHang;
+
 
 		public XuLyMatHang (ILuuTru<MatHang> dsMatHang){
 			_luuTruMatHang = dsMatHang;
@@ -30,53 +32,61 @@ namespace QLSP_XuLyNghiepVu
 		public void ThemMatHang(MatHang matHang)
 		{
 			MatHang mh = _luuTruMatHang.TimTheoTen(matHang.Ten);
-			if (mh != null)
-				throw new Exception("ID da ton tai");
+			if (mh != null && !mh.DaXoa) throw new Exception("Mặt hàng đã tồn tại");
 			matHang.Ma = _luuTruMatHang.CapPhatID();
 			_luuTruMatHang.Them(matHang);
 		}
 
-		public void SuaMatHang(MatHang matHang)
+		public void SuaMatHang(int Ma, string Ten)
 		{
 			var dsMatHang = _luuTruMatHang.DocDanhSach();
 			int p= -1;
 			for (int i = 0; i < dsMatHang.Count; i++)
 			{
-				if (dsMatHang[i].Ma != matHang.Ma && matHang.Ten == dsMatHang[i].Ten) throw new Exception("Ten mat hang da ton tai");
-				if (dsMatHang[i].Ma == matHang.Ma)
+				if (dsMatHang[i].Ma == Ma)
 				{
 					p = i;
+					continue;
 				}
+				if (Ten == dsMatHang[i].Ten && !dsMatHang[i].DaXoa) throw new Exception("Tên mặt hàng mới đã tồn tại");
+
 			}
-			if (p==-1) throw new Exception("Mat hang khong ton tai");
-			dsMatHang[p] = matHang;
+			if (p==-1) throw new Exception("Mặt hàng không tồn tại");
+			dsMatHang[p].CapNhat(Ten);
 			_luuTruMatHang.LuuDanhSach(dsMatHang);
-		}
+		} 
 		public void XoaMatHang(MatHang matHang)
-		{
+		{ 
 			_luuTruMatHang.Xoa(matHang.Ma);
 		}
 		public void ThemSanPhamVaoMatHang(int maMh , int maSanPham)
 		{
-			var matHang = DocMatHang(maMh) ?? throw new Exception("Mat hang khong ton tai");
-			matHang.ThemSanPham(maSanPham);
-			SuaMatHang(matHang);
+			var dsMatHang = _luuTruMatHang.DocDanhSach();
+			int index = IndexMatHang(dsMatHang, maMh);
+			if(index == -1) throw new Exception("Mặt hàng không tồn tại");
+			dsMatHang[index].ThemSanPham(maSanPham);
+			_luuTruMatHang.LuuDanhSach(dsMatHang);
 		}
 		public void XoaSanPhamRaKhoiMatHang(int maMh, int maSanPham)
 		{
-			var matHang = DocMatHang(maMh) ?? throw new Exception("Mat hang khong ton tai");
-			matHang.XoaSanPham(maSanPham);
-			SuaMatHang(matHang);
+			var dsMatHang = _luuTruMatHang.DocDanhSach();
+			int index = IndexMatHang(dsMatHang, maMh);
+			if (index == -1) throw new Exception("Mặt hàng không tồn tại");
+			dsMatHang[index].XoaSanPham(maSanPham);
+			_luuTruMatHang.LuuDanhSach(dsMatHang);
 		}
 		public void SanPhamThayDoiMatHang(int maMhCu, int maMhMoi, int maSanPham)
 		{
-			var matHangCu = DocMatHang(maMhCu);
-			var matHangMoi = DocMatHang(maMhMoi);
-			if (matHangCu == null || matHangMoi == null) throw new Exception("Mat hang khong ton tai");
-			matHangCu.XoaSanPham(maSanPham);
-			matHangMoi.ThemSanPham(maSanPham);
-			SuaMatHang(matHangCu);
-			SuaMatHang(matHangMoi);
+			var dsMatHang = _luuTruMatHang.DocDanhSach();
+
+			int indexMatHangCu = IndexMatHang(dsMatHang,maMhCu);
+			if(indexMatHangCu == -1) throw new Exception("Mặt hàng trước khi sửa của sản phẩm không tồn tại");
+
+			int indexMatHangMoi = IndexMatHang(dsMatHang, maMhMoi);
+			if (indexMatHangMoi == -1) throw new Exception("Mặt hàng sau khi sửa của sản phẩm không tồn tại");
+
+			dsMatHang[indexMatHangCu].ThayDoiViTriSanPhamTrongMatHang(dsMatHang[indexMatHangMoi], maSanPham);
+			_luuTruMatHang.LuuDanhSach(dsMatHang);
 		}
 
 		public MatHang DocMatHang(int maMH)
@@ -88,6 +98,12 @@ namespace QLSP_XuLyNghiepVu
 			}
 			return null;
 		}
-		
+
+		private int IndexMatHang(List<MatHang> dsMatHang, int Ma)
+		{
+			for (int i = 0; i < dsMatHang.Count; i++)
+				if (dsMatHang[i].Ma == Ma) return i;
+			return -1;
+		}
 	}
 }

@@ -10,11 +10,9 @@ namespace OOP_LTHDT_2024.Pages.PurchaseInvoice
 		private IXuLySanPham _xuLySanPham;
 		private IXuLyHoaDon _xuLyHoaDon;
         public List<SanPham> DanhSachSanPham { get;set; }
+		[BindProperty]  public List<SPHoaDon> SPHoaDon { get;set; }
         public string Chuoi = string.Empty;
 		public string Message = string.Empty;
-		[BindProperty] public List<int?> SoLuong {  get; set; }
-
-		//[BindProperty] public List<SanPhamHoaDon> SanPhamHoaDon { get; set; }
 		[BindProperty] public string TenKhachHang { get; set; }
 		[BindProperty] public DateOnly NgayTaoHD { get; set; }
 		[BindProperty] public int SDT { get; set; }
@@ -32,14 +30,12 @@ namespace OOP_LTHDT_2024.Pages.PurchaseInvoice
         }
         public void OnPost()
         {
-			try
-			{
-
+			try { 			
 				DanhSachSanPham = _xuLySanPham.DocDanhSachSanPham();
-				if (SoLuong.Count == 0 || SoLuong.Count != DanhSachSanPham.Count) throw new Exception("Số lượng sản phẩm trong hóa đơn không hợp lệ");
+				if ( SPHoaDon.Count != DanhSachSanPham.Count) throw new Exception("Số lượng sản phẩm trong hóa đơn không hợp lệ");
 
 				var HD = new HoaDon(TenKhachHang, NgayTaoHD, SDT, DiaChi);
-				_xuLyHoaDon.ThemHoaDon(HD,SoLuong);
+				_xuLyHoaDon.ThemHoaDon(HD,SPHoaDon);
 
 				Chuoi = "Thêm thành công!";
 				Message = "Bạn cần xác nhận nhập hàng ở giao diện quản lý Danh Sách Hóa Đơn";
